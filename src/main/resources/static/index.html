@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract-First Integrations API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .section {
+            margin: 30px 0;
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .link-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .link-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        .link-card h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .link-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .features {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            text-align: center;
+            color: #666;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Contract-First Integrations</h1>
+        <p class="subtitle">Reference implementation demonstrating contract-first development patterns</p>
+
+        <div class="section">
+            <h2>📚 API Documentation</h2>
+            <div class="links">
+                <a href="/swagger-ui.html" class="link-card">
+                    <h3>Swagger UI</h3>
+                    <p>Interactive API documentation</p>
+                </a>
+                <a href="/v3/api-docs" class="link-card">
+                    <h3>OpenAPI Spec</h3>
+                    <p>JSON API specification</p>
+                </a>
+                <a href="/actuator/health" class="link-card">
+                    <h3>Health Check</h3>
+                    <p>Application health status</p>
+                </a>
+                <a href="/actuator/info" class="link-card">
+                    <h3>Info</h3>
+                    <p>Application information</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✨ Key Features</h2>
+            <div class="features">
+                <ul>
+                    <li><strong>REST API Contracts:</strong> OpenAPI 3.0 specification with idempotency support</li>
+                    <li><strong>Kafka Events:</strong> Avro schemas with Schema Registry and backward compatibility</li>
+                    <li><strong>Database Migrations:</strong> Flyway for version-controlled schema evolution</li>
+                    <li><strong>Idempotency:</strong> Safe request retries and event deduplication</li>
+                    <li><strong>Error Handling:</strong> Standardized error responses with correlation IDs</li>
+                    <li><strong>Dead Letter Queue:</strong> Poison message handling for failed events</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 API Endpoints</h2>
+            <div class="features">
+                <ul>
+                    <li><strong>POST /v1/orders</strong> - Create a new order (with idempotency)</li>
+                    <li><strong>GET /v1/orders/{orderId}</strong> - Retrieve an order by ID</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                Built with ❤️ by
+                <a href="https://github.com/wallaceespindola" target="_blank">Wallace Espindola</a>
+            </p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/wallaceespindola/contract-first-integrations" target="_blank">View on GitHub</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

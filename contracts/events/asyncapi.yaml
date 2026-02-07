@@ -1,0 +1,193 @@
+asyncapi: '2.6.0'
+info:
+  title: Orders Events API
+  version: '1.0.0'
+  description: |
+    AsyncAPI documentation for order-related Kafka events.
+    Demonstrates contract-first event-driven architecture with Avro schemas.
+  contact:
+    name: Wallace Espindola
+    email: wallace.espindola@gmail.com
+    url: https://github.com/wallaceespindola
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  development:
+    url: localhost:9092
+    protocol: kafka
+    description: Local development Kafka broker
+  production:
+    url: kafka.example.com:9092
+    protocol: kafka-secure
+    description: Production Kafka cluster
+    security:
+      - saslScram: []
+
+channels:
+  orders.order-created.v1:
+    description: Topic for order creation events
+    publish:
+      summary: Order created event
+      description: Published when an order is successfully created. Consumers must implement idempotent processing.
+      operationId: onOrderCreated
+      message:
+        $ref: '#/components/messages/OrderCreated'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: orderId for partition affinity
+
+  orders.order-created.v1.dlq:
+    description: Dead Letter Queue for failed order-created messages
+    publish:
+      summary: Failed message envelope
+      description: Contains messages that could not be processed after retries
+      operationId: onDeadLetterMessage
+      message:
+        $ref: '#/components/messages/DeadLetterEnvelope'
+      bindings:
+        kafka:
+          key:
+            type: string
+            description: Original orderId
+
+components:
+  messages:
+    OrderCreated:
+      name: OrderCreated
+      title: Order Created Event
+      summary: Event emitted when an order is created
+      contentType: application/avro
+      payload:
+        $ref: '#/components/schemas/OrderCreated'
+      examples:
+        - name: Example Order Created
+          summary: Sample order with two items
+          payload:
+            eventId: 550e8400-e29b-41d4-a716-446655440000
+            occurredAt: '2024-02-06T10:30:00.000Z'
+            orderId: ORD-10001
+            customerId: CUST-123
+            source: WEB
+            items:
+              - sku: SKU-001
+                quantity: 2
+              - sku: SKU-002
+                quantity: 1
+
+    DeadLetterEnvelope:
+      name: DeadLetterEnvelope
+      title: Dead Letter Envelope
+      summary: Wrapper for failed messages sent to DLQ
+      contentType: application/avro
+      payload:
+        $ref: '#/components/schemas/DeadLetterEnvelope'
+
+  schemas:
+    OrderCreated:
+      type: object
+      required:
+        - eventId
+        - occurredAt
+        - orderId
+        - customerId
+        - items
+      properties:
+        eventId:
+          type: string
+          format: uuid
+          description: Unique event identifier for consumer idempotency
+          example: 550e8400-e29b-41d4-a716-446655440000
+        occurredAt:
+          type: string
+          format: date-time
+          description: Timestamp when the event occurred (ISO 8601)
+          example: '2024-02-06T10:30:00.000Z'
+        orderId:
+          type: string
+          description: Unique order identifier
+          example: ORD-10001
+        customerId:
+          type: string
+          description: Customer who placed the order
+          example: CUST-123
+        source:
+          type: string
+          nullable: true
+          description: Source of the order (WEB, MOBILE, API, etc.)
+          example: WEB
+        items:
+          type: array
+          minItems: 1
+          description: List of items in the order
+          items:
+            type: object
+            required:
+              - sku
+              - quantity
+            properties:
+              sku:
+                type: string
+                description: Stock Keeping Unit - product identifier
+                example: SKU-001
+              quantity:
+                type: integer
+                minimum: 1
+                description: Number of units ordered
+                example: 2
+
+    DeadLetterEnvelope:
+      type: object
+      required:
+        - originalTopic
+        - partition
+        - offset
+        - consumerGroup
+        - errorClass
+        - errorMessage
+        - failedAt
+        - payloadBase64
+      properties:
+        originalTopic:
+          type: string
+          description: The original Kafka topic where the message failed
+          example: orders.order-created.v1
+        partition:
+          type: integer
+          description: Partition of the original message
+          example: 0
+        offset:
+          type: integer
+          format: int64
+          description: Offset of the original message
+          example: 12345
+        consumerGroup:
+          type: string
+          description: Consumer group that failed to process the message
+          example: billing
+        errorClass:
+          type: string
+          description: Java exception class name
+          example: java.lang.IllegalArgumentException
+        errorMessage:
+          type: string
+          description: Error message from the exception
+          example: Invalid SKU format
+        failedAt:
+          type: string
+          format: date-time
+          description: Timestamp when processing failed
+          example: '2024-02-06T10:35:00.000Z'
+        payloadBase64:
+          type: string
+          format: byte
+          description: Original message payload encoded in Base64
+          example: eyJldmVudElkIjoiNTUwZTg0MDAtZTI5Yi00MWQ0LWE3MTYtNDQ2NjU1NDQwMDAwIn0=
+
+  securitySchemes:
+    saslScram:
+      type: scramSha256
+      description: SASL/SCRAM authentication for production Kafka

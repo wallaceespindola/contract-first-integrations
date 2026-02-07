@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: Orders API
+  version: 1.0.0
+  description: Contract-first REST API for order management demonstrating idempotency and proper error handling
+  contact:
+    name: Wallace Espindola
+    email: wallace.espindola@gmail.com
+    url: https://github.com/wallaceespindola
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /v1/orders:
+    post:
+      operationId: createOrder
+      summary: Create a new order
+      description: Creates a new order with idempotency support. Use idempotencyKey for safe retries.
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '201':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          description: Validation error - invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict - idempotency key reused with different payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/orders/{orderId}:
+    get:
+      operationId: getOrder
+      summary: Get an existing order
+      description: Retrieves an order by its ID
+      tags:
+        - Orders
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          description: The unique identifier of the order
+          schema:
+            type: string
+            example: ORD-10001
+      responses:
+        '200':
+          description: Order found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    CreateOrderRequest:
+      type: object
+      required:
+        - customerId
+        - items
+      properties:
+        customerId:
+          type: string
+          description: The customer's unique identifier
+          example: CUST-123
+        idempotencyKey:
+          type: string
+          description: Optional key for safe request retries. Duplicate requests with the same key and payload return the cached response.
+          example: 2f7dbe6b-4b0b-4d62-a497-b1b99ce1b2da
+        items:
+          type: array
+          description: List of items to order
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/OrderItem'
+
+    OrderItem:
+      type: object
+      required:
+        - sku
+        - quantity
+      properties:
+        sku:
+          type: string
+          description: Stock Keeping Unit - product identifier
+          example: SKU-001
+        quantity:
+          type: integer
+          description: Number of units to order
+          minimum: 1
+          example: 2
+
+    OrderResponse:
+      type: object
+      required:
+        - orderId
+        - customerId
+        - status
+        - items
+        - timestamp
+      properties:
+        orderId:
+          type: string
+          description: The unique identifier of the created order
+          example: ORD-10001
+        customerId:
+          type: string
+          description: The customer who placed the order
+          example: CUST-123
+        status:
+          type: string
+          description: Current order status
+          enum:
+            - CREATED
+            - REJECTED
+          example: CREATED
+        items:
+          type: array
+          description: List of ordered items
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp in ISO 8601 format
+          example: '2024-02-06T10:30:00.000Z'
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+        - traceId
+        - timestamp
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+          example: VALIDATION_ERROR
+          enum:
+            - VALIDATION_ERROR
+            - NOT_FOUND
+            - CONFLICT
+            - INTERNAL_ERROR
+        message:
+          type: string
+          description: Human-readable error message
+          example: items must not be empty
+        traceId:
+          type: string
+          description: Correlation ID for request tracing
+          example: 6b22c6b3c2c14c9aa9bafdf5c3f1c4f1
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp in ISO 8601 format
+          example: '2024-02-06T10:30:00.000Z'

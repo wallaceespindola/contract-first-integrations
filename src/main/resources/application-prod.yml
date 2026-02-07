@@ -1,0 +1,24 @@
+# Production profile configuration
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    properties:
+      schema.registry.url: ${SCHEMA_REGISTRY_URL}
+      security.protocol: SASL_SSL
+      sasl.mechanism: SCRAM-SHA-256
+      sasl.jaas.config: ${KAFKA_SASL_JAAS_CONFIG}
+
+  jpa:
+    show-sql: false
+
+logging:
+  level:
+    root: WARN
+    com.example.contractfirst: INFO
+    org.springframework.kafka: WARN
+    org.apache.kafka: WARN

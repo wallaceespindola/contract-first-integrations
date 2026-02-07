@@ -19,6 +19,65 @@
 *.tar.gz
 *.rar
 
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Spring Boot
+spring-boot-devtools.properties
+
+# Generated sources
+generated-sources/
+generated-test-sources/
+
+# Test coverage
+*.exec
+.jacoco
+
+# AI related files
+agent-logs/
+conversation-history/
+agent-cache/
+.claude/
+.ai/
+CLAUDE.md
+.copilot/
+.copilot-chat/
+.copilot-instructions/
+AGENTS.md
+.cursorignore
+.cursorindexingignore
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*

@@ -1,0 +1,57 @@
+{
+  "type": "record",
+  "name": "OrderCreated",
+  "namespace": "com.acme.events",
+  "doc": "Event emitted when an order is successfully created. Includes eventId for consumer idempotency.",
+  "fields": [
+    {
+      "name": "eventId",
+      "type": "string",
+      "doc": "Unique event identifier (UUID) for idempotent consumer processing"
+    },
+    {
+      "name": "occurredAt",
+      "type": "string",
+      "doc": "Timestamp when the event occurred (ISO 8601 format)"
+    },
+    {
+      "name": "orderId",
+      "type": "string",
+      "doc": "The unique identifier of the created order"
+    },
+    {
+      "name": "customerId",
+      "type": "string",
+      "doc": "The customer who placed the order"
+    },
+    {
+      "name": "source",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional source of the order (e.g., WEB, MOBILE, API). Nullable for backward compatibility."
+    },
+    {
+      "name": "items",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "OrderItem",
+          "fields": [
+            {
+              "name": "sku",
+              "type": "string",
+              "doc": "Stock Keeping Unit - product identifier"
+            },
+            {
+              "name": "quantity",
+              "type": "int",
+              "doc": "Number of units ordered"
+            }
+          ]
+        }
+      },
+      "doc": "List of items in the order"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "type": "record",
+  "name": "DeadLetterEnvelope",
+  "namespace": "com.acme.events",
+  "doc": "Envelope for messages that failed processing and were sent to the Dead Letter Queue (DLQ)",
+  "fields": [
+    {
+      "name": "originalTopic",
+      "type": "string",
+      "doc": "The original Kafka topic where the message failed"
+    },
+    {
+      "name": "partition",
+      "type": "int",
+      "doc": "The partition of the original message"
+    },
+    {
+      "name": "offset",
+      "type": "long",
+      "doc": "The offset of the original message"
+    },
+    {
+      "name": "consumerGroup",
+      "type": "string",
+      "doc": "The consumer group that failed to process the message"
+    },
+    {
+      "name": "errorClass",
+      "type": "string",
+      "doc": "The Java exception class name that caused the failure"
+    },
+    {
+      "name": "errorMessage",
+      "type": "string",
+      "doc": "The error message from the exception"
+    },
+    {
+      "name": "failedAt",
+      "type": "string",
+      "doc": "Timestamp when the processing failed (ISO 8601 format)"
+    },
+    {
+      "name": "payloadBase64",
+      "type": "string",
+      "doc": "The original message payload encoded in Base64 for debugging"
+    }
+  ]
+}
