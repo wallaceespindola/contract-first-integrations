@@ -1,0 +1,74 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg">
+  <!-- Substack newsletter theme -->
+  <defs>
+    <linearGradient id="substackBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6719;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#substackBg)"/>
+
+  <!-- Newsletter header style -->
+  <rect x="0" y="0" width="1200" height="120" fill="#ff6719"/>
+
+  <!-- Title -->
+  <text x="600" y="60" text-anchor="middle" font-family="Georgia, serif" font-size="44" font-weight="bold" fill="#ffffff">Weekly Insights</text>
+  <text x="600" y="95" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#ffffff" opacity="0.9">Contract-First Integration for Engineering Leaders</text>
+
+  <!-- Newsletter content area -->
+  <g>
+    <!-- Insight box 1 -->
+    <g transform="translate(100, 180)">
+      <rect x="0" y="0" width="450" height="150" rx="12" fill="#ffffff" stroke="#e9ecef" stroke-width="2"/>
+      <circle cx="40" cy="40" r="25" fill="#ff6719"/>
+      <text x="40" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">1</text>
+      <text x="90" y="35" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#212529">The Coordination Tax</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="13" fill="#495057">Teams make assumptions instead of</text>
+      <text x="90" y="78" font-family="Arial, sans-serif" font-size="13" fill="#495057">agreements. Those assumptions diverge.</text>
+      <text x="90" y="96" font-family="Arial, sans-serif" font-size="13" fill="#495057">Contract-first fixes this by making</text>
+      <text x="90" y="114" font-family="Arial, sans-serif" font-size="13" fill="#495057">integration contracts explicit upfront.</text>
+    </g>
+
+    <!-- Insight box 2 -->
+    <g transform="translate(650, 180)">
+      <rect x="0" y="0" width="450" height="150" rx="12" fill="#ffffff" stroke="#e9ecef" stroke-width="2"/>
+      <circle cx="40" cy="40" r="25" fill="#ff6719"/>
+      <text x="40" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">2</text>
+      <text x="90" y="35" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#212529">The Magic Moment</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="13" fill="#495057">When you realize contract-first enables</text>
+      <text x="90" y="78" font-family="Arial, sans-serif" font-size="13" fill="#495057">parallel development. Provider builds.</text>
+      <text x="90" y="96" font-family="Arial, sans-serif" font-size="13" fill="#495057">Consumer develops against mocks.</text>
+      <text x="90" y="114" font-family="Arial, sans-serif" font-size="13" fill="#495057">Both ship simultaneously.</text>
+    </g>
+
+    <!-- Insight box 3 -->
+    <g transform="translate(100, 370)">
+      <rect x="0" y="0" width="450" height="150" rx="12" fill="#ffffff" stroke="#e9ecef" stroke-width="2"/>
+      <circle cx="40" cy="40" r="25" fill="#ff6719"/>
+      <text x="40" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">3</text>
+      <text x="90" y="35" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#212529">Three Contract Boundaries</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="13" fill="#495057">REST APIs: OpenAPI specifications</text>
+      <text x="90" y="78" font-family="Arial, sans-serif" font-size="13" fill="#495057">Kafka Events: Avro schemas</text>
+      <text x="90" y="96" font-family="Arial, sans-serif" font-size="13" fill="#495057">Databases: Flyway migrations</text>
+      <text x="90" y="114" font-family="Arial, sans-serif" font-size="13" fill="#495057">Each boundary needs explicit contracts.</text>
+    </g>
+
+    <!-- Insight box 4 -->
+    <g transform="translate(650, 370)">
+      <rect x="0" y="0" width="450" height="150" rx="12" fill="#ffffff" stroke="#e9ecef" stroke-width="2"/>
+      <circle cx="40" cy="40" r="25" fill="#ff6719"/>
+      <text x="40" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">4</text>
+      <text x="90" y="35" font-family="Georgia, serif" font-size="18" font-weight="bold" fill="#212529">The Real Question</text>
+      <text x="90" y="60" font-family="Arial, sans-serif" font-size="13" fill="#495057">Are you optimizing for shipping code</text>
+      <text x="90" y="78" font-family="Arial, sans-serif" font-size="13" fill="#495057">quickly, or shipping working integrations</text>
+      <text x="90" y="96" font-family="Arial, sans-serif" font-size="13" fill="#495057">quickly? Contract-first front-loads design</text>
+      <text x="90" y="114" font-family="Arial, sans-serif" font-size="13" fill="#495057">but saves weeks on integration.</text>
+    </g>
+  </g>
+
+  <!-- Footer CTA -->
+  <rect x="100" y="570" width="1000" height="70" rx="10" fill="#212529"/>
+  <text x="600" y="600" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#ffffff">This Week's Challenge</text>
+  <text x="600" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#b3b3b3">Write one OpenAPI contract before writing any code. See what assumptions it forces you to clarify.</text>
+</svg>

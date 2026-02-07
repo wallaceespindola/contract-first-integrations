@@ -1,7 +1,10 @@
-.PHONY: help setup contracts dev test test-cov build docker compose down clean lint format
+.PHONY: help setup contracts dev test test-cov build docker compose down clean lint format verify
 
 APP_NAME=contract-first-integrations
 MAVEN=mvn
+
+# Set Java 21 for Maven (required for Mockito and JaCoCo compatibility)
+export JAVA_HOME=/Users/wallaceespindola/Library/Java/JavaVirtualMachines/corretto-21.0.10/Contents/Home
 
 help:
 	@echo "Available commands:"
@@ -10,9 +13,11 @@ help:
 	@echo "  make dev         - Run application locally (requires PostgreSQL, Kafka)"
 	@echo "  make test        - Run tests"
 	@echo "  make test-cov    - Run tests with coverage report"
+	@echo "  make verify      - Run tests with coverage checks (full build)"
 	@echo "  make build       - Build JAR file"
 	@echo "  make docker      - Build Docker image"
 	@echo "  make compose     - Start full stack with docker-compose"
+	@echo "  make test-docker - Run comprehensive Docker stack tests"
 	@echo "  make down        - Stop docker-compose stack"
 	@echo "  make clean       - Clean build artifacts"
 	@echo "  make lint        - Check code quality"
@@ -34,6 +39,10 @@ test-cov:
 	$(MAVEN) -B test jacoco:report
 	@echo "Coverage report: target/site/jacoco/index.html"
 
+verify:
+	$(MAVEN) -B clean verify
+	@echo "All tests passed with coverage checks"
+
 build:
 	$(MAVEN) -B clean package
 
@@ -42,6 +51,10 @@ docker:
 
 compose:
 	docker compose up --build
+
+test-docker:
+	@echo "Running comprehensive Docker stack tests..."
+	@./test-docker.sh
 
 down:
 	docker compose down -v
