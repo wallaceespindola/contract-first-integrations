@@ -1,10 +1,10 @@
 # How I Learned Contract-First Integration the Hard Way (So You Don't Have To)
 
-## The $50,000 integration bug that taught me why contracts matter more than code
+## The costly integration failure that taught me why contracts matter more than code
 
 ![Contract-First Integration Journey](./images/medium-featured-contract-first.png)
 
-Three years ago, I was responsible for integrating our order management system with a new billing service. Both teams were moving fast. We were on a tight deadline. And I made a decision that would cost us $50,000 in engineer hours and delay our launch by six weeks.
+Three years ago, I was responsible for integrating our order management system with a new billing service. Both teams were moving fast. We were on a tight deadline. And I made a decision that would delay our launch by six weeks and consume weeks of engineering time debugging preventable issues.
 
 I decided we didn't need to write formal API contracts. "We'll just talk through the integration and start coding," I said. "Contracts are bureaucracy."
 
@@ -67,7 +67,7 @@ Here's what I learned: Writing a good contract forces you to think through every
 This is the contract I wrote (simplified for this article):
 
 ```yaml
-openapi: 3.0+
+openapi: 3.2.0
 info:
   title: Orders API
   version: 1.0.0
@@ -478,28 +478,31 @@ If someone manually modifies the database schema without a migration, Flyway det
 
 ## The Results After Six Months
 
-After implementing contract-first across our order, billing, and inventory services, these are the real numbers:
+After implementing contract-first across our order, billing, and inventory services, the improvements were dramatic:
 
-**Integration bugs: Reduced by 78%**
-- Q1 (before contract-first): 23 integration bugs
-- Q2 (after contract-first): 5 integration bugs
-- Most remaining bugs were business logic, not contract mismatches
+**Integration Quality:**
+- Integration bugs reaching production dropped significantly
+- Most remaining bugs were business logic issues, not contract mismatches
+- Clear contracts eliminated the "what did you expect?" debugging sessions
 
-**Time saved: 4 weeks per integration**
+**Development Speed:**
 - Consumer teams started work immediately instead of waiting for providers
 - Mock servers enabled realistic testing without coordination overhead
+- Integration cycles measured in weeks instead of months
 
-**Breaking change incidents: 0**
-- CI caught 12 potential breaking changes during PR reviews
-- None reached production
+**Operational Reliability:**
+- CI caught potential breaking changes during PR reviews
+- No breaking changes reached production after implementing automated validation
+- Deployment confidence increased with contractual guarantees
 
-**API documentation accuracy: 100%**
-- The OpenAPI spec generates the Swagger UI, so docs can't drift from implementation
+**Documentation Accuracy:**
+- The OpenAPI spec generates the Swagger UI, so docs stay synchronized with implementation by design
+- No manual documentation maintenance required
 
-**Developer satisfaction: Way up**
+**Developer Experience:**
 - "I don't have to guess what the API returns anymore"
 - "I can start integration work the same day the contract is done"
-- "Debugging is 10x faster because the contract tells me what's expected"
+- "Debugging is dramatically faster because the contract tells me what's expected"
 
 ## What I'd Do Differently
 
@@ -507,7 +510,7 @@ If I could go back and start over, here's what I'd change:
 
 **1. Start with contracts from day one**
 
-I wish I'd learned this lesson before the $50,000 billing integration disaster. Writing contracts first feels slow at first, but it's way faster than debugging mismatched assumptions in production.
+I wish I'd learned this lesson before the costly billing integration failure. Writing contracts first feels slow at first, but it's way faster than debugging mismatched assumptions in production.
 
 **2. Invest in better tooling earlier**
 
@@ -594,7 +597,7 @@ I was measuring the wrong thing. I focused on time-to-first-line-of-code when I 
 
 Contract-first feels slower upfront. You're writing YAML before you write Java. You're having design conversations before you spin up your IDE. But it's dramatically faster overall because you avoid the painful debugging cycles where teams discover their assumptions didn't match.
 
-The $50,000 lesson I learned: In distributed systems, alignment is more expensive than you think, and misalignment is more costly than you can afford.
+The lesson I learned: In distributed systems, alignment is more expensive than you think, and misalignment is more costly than you can afford.
 
 Contracts are how you scale alignment.
 

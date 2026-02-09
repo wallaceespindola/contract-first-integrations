@@ -32,23 +32,23 @@ Three weeks later, you deploy. All three integrations break. You spend the next 
 
 ## The Business Case for Contract-First
 
-Let me share real numbers from implementing contract-first at a fintech company with eight microservices and 35 engineers:
+In my experience implementing contract-first across distributed teams, the pattern of improvements is consistent:
 
-**Before contract-first (Q1):**
-- Average integration time: 6 weeks per service
-- Integration bugs in production: 23
-- Cross-team coordination meetings: 4 per integration
-- Blocked waiting on other teams: 40% of sprint capacity
+**Common challenges before contract-first:**
+- Integration cycles measured in weeks or months as teams wait on each other
+- Frequent integration bugs reaching production from mismatched assumptions
+- Multiple coordination meetings per integration to align on expectations
+- Significant sprint capacity blocked waiting on dependencies
 
-**After contract-first (Q2):**
-- Average integration time: 2 weeks per service
-- Integration bugs in production: 5
-- Cross-team coordination meetings: 1 per integration (contract review)
-- Blocked waiting on other teams: 8% of sprint capacity
+**Typical improvements after contract-first adoption:**
+- Integration time dramatically reduced as teams work in parallel
+- Integration bugs drop significantly (most remaining issues are business logic, not contracts)
+- One contract review meeting replaces ongoing coordination discussions
+- Sprint capacity freed up as mock servers eliminate waiting on real implementations
 
-That's a **67% reduction in integration time** and a **32% increase in team velocity**. For an engineering org with $10M in annual salary costs, this translates to roughly $3.2M in recovered productivity per year.
+Organizations implementing contract-first development report measurable improvements in integration speed, reduced coordination overhead, and fewer production incidents. The pattern of enabling parallel development and catching errors earlier translates to meaningful productivity gains.
 
-Your leadership cares about these numbers. They care that your team ships faster, has fewer production incidents, and doesn't bottleneck other teams.
+Your leadership cares about these outcomes. They care that your team ships faster, has fewer production incidents, and doesn't bottleneck other teams.
 
 ## How Contract-First Works in Practice
 
@@ -59,10 +59,11 @@ Here's the framework I use for every integration:
 Before writing any code, I create an OpenAPI spec for REST APIs or an Avro schema for event-driven systems. Here's what a production contract looks like:
 
 ```yaml
-openapi: 3.0+
+openapi: 3.2.0
 info:
   title: Orders API
   version: 1.0.0
+  description: Contract-first REST API for order management
 
 paths:
   /v1/orders:

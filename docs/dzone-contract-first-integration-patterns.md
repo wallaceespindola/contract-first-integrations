@@ -50,7 +50,7 @@ OpenAPI 3.0 specs are the gold standard for REST API contracts. You define endpo
 Here's a production OpenAPI contract for an order management API:
 
 ```yaml
-openapi: 3.0+
+openapi: 3.2.0
 info:
   title: Orders API
   version: 1.0.0
@@ -582,26 +582,29 @@ sequenceDiagram
 
 **Figure 2: End-to-end flow showing REST → DB → Kafka integration with contracts enforced at each boundary**
 
-## Real-World Benefits: Data From Production
+## Real-World Benefits: Production Implementation Experience
 
-After implementing contract-first across three services (orders, billing, inventory), here's what we measured:
+After implementing contract-first across multiple services (orders, billing, inventory), teams consistently observe significant improvements:
 
-**Integration bugs reduced by 78%**
-- Before: 23 integration bugs in Q1
-- After: 5 integration bugs in Q2
-- Most remaining bugs were business logic, not contract mismatches
+**Integration Quality:**
+- Substantial reduction in integration bugs reaching production
+- Most remaining bugs are business logic issues, not contract mismatches
+- Clear contracts eliminate ambiguity in integration expectations
 
-**Parallel development time saved: 4 weeks per integration**
-- Consumer teams started integration work immediately instead of waiting for provider completion
-- Mock servers enabled realistic integration testing without coordination
+**Development Velocity:**
+- Integration cycles measured in weeks rather than months
+- Consumer teams start integration work immediately instead of waiting for provider completion
+- Mock servers enable realistic integration testing without coordination delays
 
-**Breaking change incidents: 0**
-- CI caught 12 potential breaking changes before they reached production
-- All caught during PR review, not after deployment
+**Operational Reliability:**
+- CI-enforced contract validation prevents breaking changes from reaching production
+- Breaking changes caught during PR review, not after deployment
+- Automated validation ensures compatibility before merge
 
-**API documentation accuracy: 100%**
-- OpenAPI spec is the code generator, so docs and implementation can't drift
-- Swagger UI always reflects actual API behavior
+**Documentation Accuracy:**
+- Documentation generated from OpenAPI specs stays synchronized with implementation by design
+- Swagger UI always reflects actual API behavior as both derive from the same contract
+- No manual documentation maintenance required
 
 ## Common Pitfalls and How to Avoid Them
 
@@ -683,6 +686,8 @@ Contract-first isn't a silver bullet, but it transforms integration from a coord
 - OpenAPI 3.0 Specification: [spec.openapis.org](https://spec.openapis.org/oas/latest.html)
 - Confluent Schema Registry: [docs.confluent.io/platform/current/schema-registry](https://docs.confluent.io/platform/current/schema-registry/index.html)
 - Flyway Documentation: [flywaydb.org/documentation](https://flywaydb.org/documentation/)
+- Moesif: Mastering Contract-First API Development: [moesif.com/blog](https://www.moesif.com/blog/technical/api-development/Mastering-Contract-First-API-Development-Key-Strategies-and-Benefits/)
+- Research on Microservices Issues: [arxiv.org/html/2302.01894v4](https://arxiv.org/html/2302.01894v4)
 
 ---
 

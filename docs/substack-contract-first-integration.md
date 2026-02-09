@@ -1,16 +1,16 @@
-# Contract-First Integration: Weekly Insights for Engineering Leaders
+# Contract-First Integration: Insights for Engineering Leaders
 
 ## Why the best engineering teams define contracts before code (and what they learned the hard way)
 
-![Contract-First Integration Insights](./images/substack-featured-contract-first.png)
+![Contract-First Integration Insights](./images/substack-featured-contract-first.svg)
 
-*Welcome to this week's deep dive. Today we're talking about contract-first integration—a pattern that separates high-performing engineering organizations from those constantly fighting integration fires.*
+*Today we're exploring contract-first integration—a pattern that separates high-performing engineering organizations from those constantly fighting integration fires.*
 
 ---
 
 Hey everyone,
 
-This week I want to talk about something that's been coming up in every architecture review I've been part of lately: How do you integrate distributed systems without creating a coordination nightmare?
+I want to talk about something that's been coming up in every architecture review I've been part of lately: How do you integrate distributed systems without creating a coordination nightmare?
 
 I've seen three companies in the past month alone struggle with the same problem. They build microservices. They promise team autonomy. But then Team A can't ship because they're waiting for Team B's API. Team B can't finalize their API because they don't know exactly what Team C needs. Everyone's blocked. Velocity tanks.
 
@@ -18,7 +18,7 @@ Sound familiar?
 
 There's a better way, and it's not new. Companies like Netflix, Uber, and Amazon figured this out years ago. They use contract-first development. But here's the thing—most teams I talk to either haven't tried it, or they tried it once, got frustrated with the overhead, and gave up.
 
-This week I want to share what I've learned about making contract-first actually work in production. Not the theory. The real stuff. The patterns that work, the pitfalls to avoid, and the metrics that tell you if it's actually helping.
+I want to share what I've learned about making contract-first actually work in production. Not the theory. The real stuff. The patterns that work, the pitfalls to avoid, and the metrics that tell you if it's actually helping.
 
 ## The Problem Nobody Talks About
 
@@ -259,19 +259,19 @@ The teams I see succeeding are the ones who realize that the bottleneck in distr
 
 And contracts are how you scale coordination.
 
-## What I'm Watching This Week
+## What's New in the Ecosystem
 
-A few things on my radar related to contract-first patterns:
+A few recent developments related to contract-first patterns worth noting:
 
 **AsyncAPI 3.0 release**: The team behind AsyncAPI (like OpenAPI but for event-driven systems) released 3.0. It adds better support for Kafka topics, CloudEvents, and NATS. If you're doing event-driven architecture, worth checking out.
 
-**Spring Cloud Contract 4.1**: New release includes better integration with OpenAPI and improved stub generation. Makes contract testing easier in Spring Boot ecosystems.
+**Spring Cloud Contract 4.1**: Recent release includes better integration with OpenAPI and improved stub generation. Makes contract testing easier in Spring Boot ecosystems.
 
 **Confluent Schema Registry 8.1**: Added support for JSONSchema rules and improved backward compatibility checking. If you're using JSON instead of Avro for Kafka, this might be relevant.
 
-## This Week's Challenge
+## Try This Yourself
 
-Here's what I'd suggest trying this week:
+Here's what I'd suggest trying:
 
 Pick one API integration your team is working on right now. Before you write any implementation code, spend 60 minutes writing the OpenAPI contract.
 
@@ -283,11 +283,11 @@ My guess: You'll find at least three things that would've caused integration bug
 
 And that's the value. Not the YAML file. The forcing function that makes you clarify assumptions before they diverge.
 
-## Reader Questions
+## Further Reading
 
-Last week several of you wrote in asking about contract testing with Pact. I'll do a deep dive on that next week—how contract testing differs from contract-first development, when to use each, and how they complement each other.
+If you're interested in learning more about contract testing with Pact and how it differs from contract-first development, check out the additional resources in the repository. Understanding when to use each approach and how they complement each other is crucial for building robust integrations.
 
-If you have questions about contract-first patterns, hit reply. I read every response.
+If you have questions about contract-first patterns, feel free to reach out. I read every message.
 
 ---
 
@@ -306,17 +306,18 @@ Check it out: [github.com/wallaceespindola/contract-first-integrations](https://
 
 ---
 
-**What's Next**
+**Related Topics**
 
-Next week: Contract testing with Pact vs contract-first development. What's the difference? When do you use each? How do they work together?
+If you found this helpful, you might also be interested in:
+- Contract testing with Pact vs contract-first development
+- Schema evolution patterns in production
+- Handling required field additions to events in production systems
 
-Week after: Schema evolution patterns in production. What happens when you need to add a required field to an event that's already in production? Real examples from the trenches.
+All explored with real examples from the trenches.
 
 ---
 
-Thanks for reading. If this was helpful, forward it to someone on your team who's dealing with integration headaches. The best way to support this newsletter is to share it.
-
-Until next week,
+Thanks for reading. If this was helpful, share it with someone on your team who's dealing with integration headaches.
 
 Wallace
 
@@ -327,8 +328,4 @@ Wallace
 - [LinkedIn](https://www.linkedin.com/in/wallaceespindola/)
 - [Speaker Deck](https://speakerdeck.com/wallacese)
 
-**Reply to this email** with questions, feedback, or topics you want me to cover. I read everything and respond to as many as I can.
-
----
-
-*You're receiving this because you subscribed to weekly insights on software architecture and distributed systems. Unsubscribe anytime.*
+**Get in touch** with questions, feedback, or topics you want me to explore. I read everything and respond to as many as I can.
