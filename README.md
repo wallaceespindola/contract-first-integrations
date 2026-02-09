@@ -10,7 +10,7 @@ Reference implementation demonstrating **contract-first** (API-first / schema-fi
 
 Contract-first is an approach where you **define the integration boundary first** (the contract), then implement code that conforms to it. This repository demonstrates three types of contracts:
 
-1. **REST API Contracts** (OpenAPI 3.x)
+1. **REST API Contracts** (OpenAPI 3.0)
 2. **Kafka Event Contracts** (Apache Avro + Schema Registry)
 3. **Database Contracts** (Flyway migrations)
 
@@ -31,7 +31,7 @@ Contract-first is an approach where you **define the integration boundary first*
 make compose
 
 # Access the application
-open http://localhost:8080
+open http://localhost:8080/
 open http://localhost:8080/swagger-ui.html
 ```
 
@@ -114,7 +114,7 @@ curl -X POST http://localhost:8080/v1/orders \
 
 ```
 contract-first-integrations/
-├── contracts/                    # First-class contract artifacts
+├── contracts/                   # First-class contract artifacts
 │   ├── openapi/
 │   │   └── orders-api.v1.yaml   # REST API contract
 │   ├── events/
@@ -279,16 +279,16 @@ SELECT * FROM processed_events;
 
 ## 📚 API Documentation
 
-- **Swagger UI**: http://localhost:8080/swagger-ui.html
-- **OpenAPI Spec**: http://localhost:8080/v3/api-docs
-- **Health Check**: http://localhost:8080/actuator/health
-- **Info**: http://localhost:8080/actuator/info
-- **Static Page**: http://localhost:8080/
+- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **OpenAPI Spec**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- **Health Check**: [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health)
+- **Info**: [http://localhost:8080/actuator/info](http://localhost:8080/actuator/info)
+- **Static Page**: [http://localhost:8080/](http://localhost:8080/)
 
 ## 🔧 Technology Stack
 
 - **Java 21** (Stable LTS)
-- **Spring Boot 3.4.2** (Web, Data JPA, Actuator, Kafka)
+- **Spring Boot 3.5.10** (Web, Data JPA, Actuator, Kafka)
 - **PostgreSQL 17** (Database)
 - **Apache Kafka 7.8.1** (Event streaming)
 - **Apache Avro 1.12.0** (Event serialization)
@@ -300,7 +300,7 @@ SELECT * FROM processed_events;
 
 ## 📖 Further Reading
 
-- [OpenAPI Specification](https://spec.openapis.org/oas/v3.1.0)
+- [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 - [Apache Avro Documentation](https://avro.apache.org/docs/current/)
 - [Flyway Migrations](https://flywaydb.org/documentation/)
 - [Kafka Idempotent Producer](https://kafka.apache.org/documentation/#producerconfigs_enable.idempotence)
@@ -312,11 +312,11 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## 👤 Author
 
-**Wallace Espindola**
-
-- Email: wallace.espindola@gmail.com
-- LinkedIn: [wallaceespindola](https://www.linkedin.com/in/wallaceespindola/)
-- GitHub: [@wallaceespindola](https://github.com/wallaceespindola)
+- **Name:** Wallace Espindola - Software Engineer Sr. / Solution Architect / Java & Python Dev
+- **Contact:** [wallace.espindola@gmail.com](mailto:wallace.espindola@gmail.com)
+- **LinkedIn:** [linkedin.com/in/wallaceespindola](https://www.linkedin.com/in/wallaceespindola/)
+- **GitHub:** [github.com/wallaceespindola](https://github.com/wallaceespindola/)
+- **Speaker Deck:** [speakerdeck.com/wallacese](https://speakerdeck.com/wallacese)
 
 ## 🤝 Contributing
 

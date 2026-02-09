@@ -39,7 +39,7 @@ Instead of “wait for the other system to finish”, both teams implement again
 ## 3) Contract types in Java-based integration
 
 ### A) REST API Contract (OpenAPI)
-- Contract format: **OpenAPI 3.x** (`.yaml` / `.json`)
+- Contract format: **OpenAPI 3.0** (`.yaml` / `.json`)
 - Generated artifacts:
   - Server stubs/interfaces (Spring)
   - DTO models
@@ -99,7 +99,7 @@ This layout helps reviewers and CI treat contracts as first-class artifacts.
 **File:** `contracts/openapi/orders-api.v1.yaml`
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Orders API
   version: 1.0.0
