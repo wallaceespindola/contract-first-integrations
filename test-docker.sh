@@ -32,7 +32,7 @@ echo ""
 
 # Clean up previous containers
 echo "Cleaning up previous containers..."
-docker compose down -v 2>/dev/null || true
+docker-compose down -v 2>/dev/null || true
 echo -e "${GREEN}✓ Cleanup complete${NC}"
 echo ""
 
@@ -51,7 +51,7 @@ echo ""
 
 # Start the stack
 echo "Starting Docker Compose stack..."
-docker compose up -d --build
+docker-compose up -d --build
 echo -e "${GREEN}✓ Containers starting${NC}"
 echo ""
 
@@ -66,16 +66,16 @@ for service in "${services[@]}"; do
     attempt=0
 
     while [ $attempt -lt $max_attempts ]; do
-        if docker compose ps $service | grep -q "healthy"; then
+        if docker-compose ps $service | grep -q "healthy"; then
             echo -e "${GREEN}✓ healthy${NC}"
             break
-        elif docker compose ps $service | grep -q "running"; then
+        elif docker-compose ps $service | grep -q "running"; then
             echo -n "."
             sleep 2
             attempt=$((attempt + 1))
         else
             echo -e "${RED}✗ not running${NC}"
-            docker compose logs $service
+            docker-compose logs $service
             exit 1
         fi
     done
@@ -189,7 +189,7 @@ echo ""
 
 # Check Kafka topics
 echo "Checking Kafka topics..."
-docker compose exec kafka kafka-topics --list --bootstrap-server localhost:9092 2>/dev/null || echo "Could not list topics"
+docker-compose exec kafka kafka-topics --list --bootstrap-server localhost:9092 2>/dev/null || echo "Could not list topics"
 echo ""
 
 # Check Schema Registry
@@ -205,7 +205,7 @@ echo ""
 
 # Check PostgreSQL
 echo "Checking PostgreSQL..."
-docker compose exec postgres psql -U postgres -d orders -c "\dt" 2>/dev/null || echo "Could not query database"
+docker-compose exec postgres psql -U postgres -d orders -c "\dt" 2>/dev/null || echo "Could not query database"
 echo ""
 
 # Summary
@@ -214,10 +214,10 @@ echo "Test Summary"
 echo "=================================="
 echo ""
 echo "Services running:"
-docker compose ps
+docker-compose ps
 echo ""
-echo "Logs can be viewed with: docker compose logs -f [service]"
-echo "Stop with: docker compose down"
-echo "Stop and remove volumes: docker compose down -v"
+echo "Logs can be viewed with: docker-compose logs -f [service]"
+echo "Stop with: docker-compose down"
+echo "Stop and remove volumes: docker-compose down -v"
 echo ""
 echo -e "${GREEN}✓ Docker Compose test complete${NC}"

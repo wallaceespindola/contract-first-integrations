@@ -10,7 +10,7 @@ After implementing contract-first integration across three different microservic
 
 Contract-first development flips this model. By defining your integration contracts upfront (OpenAPI specs, Avro schemas, database migrations), you enable teams to work in parallel, catch breaking changes early through CI validation, and treat contracts as the single source of truth. This isn't theoretical—this is how Netflix, Uber, and Amazon scale their engineering organizations.
 
-In this article, I'll show you production-ready contract-first patterns using Spring Boot 3, OpenAPI 3.0, Apache Kafka with Avro, and Flyway migrations. You'll see real code from a working system that handles the three critical integration boundaries: REST APIs, event-driven messaging, and database schemas.
+In this article, I'll show you production-ready contract-first patterns using Spring Boot 3+, OpenAPI 3.0+, Apache Kafka with Avro, and Flyway migrations. You'll see real code from a working system that handles the three critical integration boundaries: REST APIs, event-driven messaging, and database schemas.
 
 ## The Problem: Why Traditional Integration Fails at Scale
 
@@ -50,7 +50,7 @@ OpenAPI 3.0 specs are the gold standard for REST API contracts. You define endpo
 Here's a production OpenAPI contract for an order management API:
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.0+
 info:
   title: Orders API
   version: 1.0.0
@@ -680,7 +680,7 @@ Contract-first isn't a silver bullet, but it transforms integration from a coord
 **Full source code**: [github.com/wallaceespindola/contract-first-integrations](https://github.com/wallaceespindola/contract-first-integrations)
 
 **Related reading**:
-- OpenAPI 3.0 Specification: [spec.openapis.org](https://spec.openapis.org/oas/v3.0.3)
+- OpenAPI 3.0 Specification: [spec.openapis.org](https://spec.openapis.org/oas/latest.html)
 - Confluent Schema Registry: [docs.confluent.io/platform/current/schema-registry](https://docs.confluent.io/platform/current/schema-registry/index.html)
 - Flyway Documentation: [flywaydb.org/documentation](https://flywaydb.org/documentation/)
 
@@ -688,6 +688,6 @@ Contract-first isn't a silver bullet, but it transforms integration from a coord
 
 Need more tech insights?
 
-Check out my [GitHub](https://github.com/wallaceespindola), [LinkedIn](https://www.linkedin.com/in/wallaceespindola/), and [Speaker Deck](https://speakerdeck.com/wallaceespindola).
+Check out my [GitHub](https://github.com/wallaceespindola), [LinkedIn](https://www.linkedin.com/in/wallaceespindola/), and [Speaker Deck](https://speakerdeck.com/wallacese).
 
 Happy coding!

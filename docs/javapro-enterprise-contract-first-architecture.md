@@ -63,7 +63,7 @@ Consider an order management service in an e-commerce platform. The service must
 **Contract:** `contracts/openapi/orders-api.v1.yaml`
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.0+
 info:
   title: Orders API
   version: 1.0.0
@@ -1040,7 +1040,7 @@ The patterns presented—OpenAPI for REST, Avro with Schema Registry for events,
 
 ## References
 
-1. OpenAPI Specification 3.0.3: [https://spec.openapis.org/oas/v3.0.3](https://spec.openapis.org/oas/v3.0.3)
+1. OpenAPI Specification 3.0+: [https://spec.openapis.org/oas/latest.html](https://spec.openapis.org/oas/latest.html)
 2. Apache Avro Documentation: [https://avro.apache.org/docs/current/](https://avro.apache.org/docs/current/)
 3. Confluent Schema Registry: [https://docs.confluent.io/platform/current/schema-registry/](https://docs.confluent.io/platform/current/schema-registry/)
 4. Flyway Database Migrations: [https://flywaydb.org/documentation/](https://flywaydb.org/documentation/)
@@ -1050,10 +1050,11 @@ The patterns presented—OpenAPI for REST, Avro with Schema Registry for events,
 
 **Source Code:** Complete working implementation available at [github.com/wallaceespindola/contract-first-integrations](https://github.com/wallaceespindola/contract-first-integrations)
 
-**Author:** Wallace Espindola
-**Contact:** wallace.espindola@gmail.com
-**LinkedIn:** [linkedin.com/in/wallaceespindola](https://www.linkedin.com/in/wallaceespindola/)
-**GitHub:** [github.com/wallaceespindola](https://github.com/wallaceespindola/)
+- **Author:** Wallace Espindola - Software Engineer Sr. / Solution Architect / Java & Python Dev
+- **Contact:** [wallace.espindola@gmail.com](mailto:wallace.espindola@gmail.com)
+- **LinkedIn:** [linkedin.com/in/wallaceespindola](https://www.linkedin.com/in/wallaceespindola/)
+- **GitHub:** [github.com/wallaceespindola](https://github.com/wallaceespindola/)
+- **Speaker Deck:** [speakerdeck.com/wallacese](https://speakerdeck.com/wallacese)
 
 ---
 

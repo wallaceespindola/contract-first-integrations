@@ -59,7 +59,7 @@ Here's the framework I use for every integration:
 Before writing any code, I create an OpenAPI spec for REST APIs or an Avro schema for event-driven systems. Here's what a production contract looks like:
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.0+
 info:
   title: Orders API
   version: 1.0.0
@@ -222,7 +222,7 @@ But when you measure what actually matters—time to integration, production bug
 
 **Resources:**
 - Full working example: [github.com/wallaceespindola/contract-first-integrations](https://github.com/wallaceespindola/contract-first-integrations)
-- OpenAPI Specification: [spec.openapis.org](https://spec.openapis.org/oas/v3.0.3)
+- OpenAPI Specification: [spec.openapis.org](https://spec.openapis.org/oas/latest.html)
 - Contract testing with Pact: [pact.io](https://pact.io)
 
 ---
@@ -231,6 +231,6 @@ Need more tech insights?
 
 Follow me on [LinkedIn](https://www.linkedin.com/in/wallaceespindola/) for weekly posts on software architecture and engineering leadership.
 
-Check out my [GitHub](https://github.com/wallaceespindola) and [Speaker Deck](https://speakerdeck.com/wallaceespindola).
+Check out my [GitHub](https://github.com/wallaceespindola) and [Speaker Deck](https://speakerdeck.com/wallacese).
 
 #softwaredevelopment #microservices #api #engineering #careeradvice #java #springboot #kafka

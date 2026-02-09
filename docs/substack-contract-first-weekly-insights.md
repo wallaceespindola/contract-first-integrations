@@ -60,7 +60,7 @@ You do this (contract-first):
 
 ```yaml
 # contracts/openapi/orders-api.yaml
-openapi: 3.0.3
+openapi: 3.2.0
 paths:
   /v1/orders:
     post:
@@ -263,11 +263,11 @@ And contracts are how you scale coordination.
 
 A few things on my radar related to contract-first patterns:
 
-**AsyncAPI 3.0 release**: The team behind AsyncAPI (like OpenAPI but for event-driven systems) just released 3.0. It adds better support for Kafka topics, CloudEvents, and NATS. If you're doing event-driven architecture, worth checking out.
+**AsyncAPI 3.0 release**: The team behind AsyncAPI (like OpenAPI but for event-driven systems) released 3.0. It adds better support for Kafka topics, CloudEvents, and NATS. If you're doing event-driven architecture, worth checking out.
 
 **Spring Cloud Contract 4.1**: New release includes better integration with OpenAPI and improved stub generation. Makes contract testing easier in Spring Boot ecosystems.
 
-**Confluent Schema Registry 7.8**: Added support for JSONSchema rules and improved backward compatibility checking. If you're using JSON instead of Avro for Kafka, this might be relevant.
+**Confluent Schema Registry 8.1**: Added support for JSONSchema rules and improved backward compatibility checking. If you're using JSON instead of Avro for Kafka, this might be relevant.
 
 ## This Week's Challenge
 
@@ -325,7 +325,7 @@ Wallace
 **Connect:**
 - [GitHub](https://github.com/wallaceespindola)
 - [LinkedIn](https://www.linkedin.com/in/wallaceespindola/)
-- [Speaker Deck](https://speakerdeck.com/wallaceespindola)
+- [Speaker Deck](https://speakerdeck.com/wallacese)
 
 **Reply to this email** with questions, feedback, or topics you want me to cover. I read everything and respond to as many as I can.
 

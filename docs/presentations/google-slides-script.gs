@@ -221,7 +221,7 @@ function addThreeContractTypesSlide(presentation) {
   formatTitle(shapes[0]);
 
   const content = '1️⃣ REST API Contract\n' +
-    '• Format: OpenAPI 3.x YAML/JSON\n' +
+    '• Format: OpenAPI 3.0 YAML/JSON\n' +
     '• Generates: Server stubs, DTOs, client SDKs, mock servers\n\n' +
     '2️⃣ Kafka/Event Contract\n' +
     '• Format: Avro/Protobuf schemas + AsyncAPI\n' +
@@ -535,7 +535,7 @@ function addToolsSlide(presentation) {
   formatTitle(shapes[0]);
 
   const content = 'REST Contracts\n' +
-    '• OpenAPI 3.x, openapi-generator, Swagger UI, Prism\n\n' +
+    '• OpenAPI 3.0, openapi-generator, Swagger UI, Prism\n\n' +
     'Kafka Contracts\n' +
     '• Apache Avro, Confluent Schema Registry, AsyncAPI\n\n' +
     'Database Contracts\n' +

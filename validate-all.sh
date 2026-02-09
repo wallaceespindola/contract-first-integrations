@@ -19,12 +19,12 @@ PASSED=0
 
 check_pass() {
     echo -e "${GREEN}✓ $1${NC}"
-    ((PASSED++))
+    PASSED=$((PASSED + 1))
 }
 
 check_fail() {
     echo -e "${RED}✗ $1${NC}"
-    ((FAILED++))
+    FAILED=$((FAILED + 1))
 }
 
 check_warn() {
@@ -64,7 +64,8 @@ echo ""
 
 export JAVA_HOME=/Users/wallaceespindola/Library/Java/JavaVirtualMachines/corretto-21.0.10/Contents/Home
 
-TEST_OUTPUT=$(mvn test -q 2>&1 | grep "Tests run:")
+# Run tests and capture summary (without -q to get test output)
+TEST_OUTPUT=$(mvn test 2>&1 | grep -E "Tests run:" | tail -1 || echo "Tests run: 0")
 if echo "$TEST_OUTPUT" | grep -q "Failures: 0, Errors: 0"; then
     check_pass "All unit tests passing: $TEST_OUTPUT"
 else

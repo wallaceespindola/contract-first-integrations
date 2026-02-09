@@ -20,14 +20,15 @@ help:
 	@echo "  make test-docker - Run comprehensive Docker stack tests"
 	@echo "  make down        - Stop docker-compose stack"
 	@echo "  make clean       - Clean build artifacts"
-	@echo "  make lint        - Check code quality"
-	@echo "  make format      - Format code"
+	@echo "  make lint        - Check code quality with Checkstyle"
+	@echo "  make format      - Auto-format code with Spotless"
+	@echo "  make format-check - Check code formatting without changes"
 
 setup:
 	$(MAVEN) clean install -DskipTests
 
 contracts:
-	$(MAVEN) avro:schema
+	$(MAVEN) generate-sources
 
 dev:
 	$(MAVEN) spring-boot:run -Dspring-boot.run.profiles=dev
@@ -50,38 +51,41 @@ docker:
 	docker build -t $(APP_NAME):latest .
 
 compose:
-	docker compose up --build
+	docker-compose up --build
 
 test-docker:
 	@echo "Running comprehensive Docker stack tests..."
 	@./test-docker.sh
 
 down:
-	docker compose down -v
+	docker-compose down -v
 
 clean:
 	$(MAVEN) clean
-	docker compose down -v
+	docker-compose down -v
 	rm -rf target/
 
 lint:
 	$(MAVEN) checkstyle:check
 
 format:
-	$(MAVEN) formatter:format
+	$(MAVEN) spotless:apply
+
+format-check:
+	$(MAVEN) spotless:check
 
 # Development helpers
 logs:
-	docker compose logs -f app
+	docker-compose logs -f app
 
 kafka-topics:
-	docker compose exec kafka kafka-topics --list --bootstrap-server localhost:9092
+	docker-compose exec kafka kafka-topics --list --bootstrap-server localhost:9092
 
 kafka-consume:
-	docker compose exec kafka kafka-console-consumer --topic orders.order-created.v1 --from-beginning --bootstrap-server localhost:9092
+	docker-compose exec kafka kafka-console-consumer --topic orders.order-created.v1 --from-beginning --bootstrap-server localhost:9092
 
 db-connect:
-	docker compose exec postgres psql -U postgres -d orders
+	docker-compose exec postgres psql -U postgres -d orders
 
 db-migrate:
 	$(MAVEN) flyway:migrate

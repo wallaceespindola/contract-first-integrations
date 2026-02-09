@@ -64,7 +64,7 @@ Assumptions drift
 ## Three Contract Types in Java
 
 ### 1️⃣ REST API Contract
-- **Format:** OpenAPI 3.x YAML/JSON
+- **Format:** OpenAPI 3.0 YAML/JSON
 - **Generates:** Server stubs, DTOs, client SDKs, mock servers
 
 ### 2️⃣ Kafka/Event Contract
@@ -513,7 +513,7 @@ Not dependencies on each other
 ## Tools & Technologies
 
 ### REST Contracts
-- OpenAPI 3.x specification
+- OpenAPI 3.0 specification
 - openapi-generator (Java SDK generation)
 - Swagger UI / ReDoc (documentation)
 - Prism / Stoplight (mock servers)
@@ -757,7 +757,7 @@ CI/CD enforces contract compliance automatically
 ## Questions?
 
 **Wallace Espindola**
-Senior Software Engineer
+Sr. Software Engineer / Solution Architect
 
 📧 wallace.espindola@gmail.com
 🔗 linkedin.com/in/wallaceespindola

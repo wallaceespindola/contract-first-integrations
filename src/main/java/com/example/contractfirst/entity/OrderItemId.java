@@ -1,15 +1,14 @@
 package com.example.contractfirst.entity;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * Composite primary key for OrderItemEntity.
  *
- * Combines orderId + sku as defined in database contract.
+ * <p>Combines orderId + sku as defined in database contract.
  *
  * @author Wallace Espindola
  */
@@ -17,6 +16,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItemId implements Serializable {
-    private String orderId;
-    private String sku;
+  private String orderId;
+  private String sku;
 }

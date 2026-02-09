@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 /**
  * JPA entity for order_items table.
  *
- * Uses composite key (orderId + sku) as defined in database contract.
- * Maps to contract: contracts/db/flyway/V1__create_orders.sql
+ * <p>Uses composite key (orderId + sku) as defined in database contract. Maps to contract:
+ * contracts/db/flyway/V1__create_orders.sql
  *
  * @author Wallace Espindola
  */
@@ -21,14 +21,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderItemEntity {
 
-    @Id
-    @Column(name = "order_id", length = 32, nullable = false)
-    private String orderId;
+  @Id
+  @Column(name = "order_id", length = 32, nullable = false)
+  private String orderId;
 
-    @Id
-    @Column(name = "sku", length = 64, nullable = false)
-    private String sku;
+  @Id
+  @Column(name = "sku", length = 64, nullable = false)
+  private String sku;
 
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
+  @Column(name = "quantity", nullable = false)
+  private Integer quantity;
 }

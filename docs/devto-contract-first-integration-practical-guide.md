@@ -49,7 +49,7 @@ Let's build a simple orders API. We'll start with the contract.
 Create a file: `contracts/openapi/orders-api.yaml`
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.0+
 info:
   title: Orders API
   version: 1.0.0

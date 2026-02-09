@@ -7,15 +7,13 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data JPA repository for ProcessedEventEntity.
  *
- * Supports Kafka consumer idempotency pattern.
+ * <p>Supports Kafka consumer idempotency pattern.
  *
  * @author Wallace Espindola
  */
 @Repository
 public interface ProcessedEventRepository extends JpaRepository<ProcessedEventEntity, String> {
 
-    /**
-     * Check if an event has already been processed.
-     */
-    boolean existsByEventId(String eventId);
+  /** Check if an event has already been processed. */
+  boolean existsByEventId(String eventId);
 }

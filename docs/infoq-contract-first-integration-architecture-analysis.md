@@ -54,7 +54,7 @@ Enterprise distributed systems typically exhibit three distinct integration boun
 
 ### Pattern 1: Synchronous Request-Response (REST APIs)
 
-For synchronous HTTP-based integration, OpenAPI 3.0 provides the industry-standard contract specification format. The contract defines:
+For synchronous HTTP-based integration, OpenAPI 3.0+ provides the industry-standard contract specification format. The contract defines:
 
 - **Endpoint semantics**: HTTP methods, path structures, query parameters
 - **Data schemas**: Request and response payload structures with validation constraints
@@ -64,7 +64,7 @@ For synchronous HTTP-based integration, OpenAPI 3.0 provides the industry-standa
 Consider this OpenAPI contract excerpt for an order management service:
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.0+
 info:
   title: Orders API
   version: 1.0.0
@@ -366,7 +366,7 @@ Several emerging patterns extend contract-first principles:
 
 ## References
 
-1. OpenAPI Specification 3.0.3. OpenAPI Initiative, 2021. https://spec.openapis.org/oas/v3.0.3
+1. OpenAPI Specification 3.0+. OpenAPI Initiative, 2024. https://spec.openapis.org/oas/latest.html
 2. Apache Avro 1.11 Specification. Apache Software Foundation, 2023. https://avro.apache.org/docs/current/spec.html
 3. Confluent Schema Registry Documentation. Confluent Inc., 2024. https://docs.confluent.io/platform/current/schema-registry/
 4. Richardson, C. "Microservices Patterns." Manning Publications, 2018.
@@ -378,9 +378,9 @@ Several emerging patterns extend contract-first principles:
 
 Wallace Espindola is a software architect specializing in distributed systems and microservices architecture. He has implemented contract-first integration patterns at fintech, e-commerce, and logistics organizations.
 
-**Contact:** wallace.espindola@gmail.com
-**LinkedIn:** [linkedin.com/in/wallaceespindola](https://www.linkedin.com/in/wallaceespindola/)
-**GitHub:** [github.com/wallaceespindola](https://github.com/wallaceespindola/)
+- **Contact:** [wallace.espindola@gmail.com](mailto:wallace.espindola@gmail.com)
+- **LinkedIn:** [linkedin.com/in/wallaceespindola](https://www.linkedin.com/in/wallaceespindola/)
+- **GitHub:** [github.com/wallaceespindola](https://github.com/wallaceespindola/)
 
 **Full implementation available:** [github.com/wallaceespindola/contract-first-integrations](https://github.com/wallaceespindola/contract-first-integrations)
 

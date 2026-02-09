@@ -52,7 +52,7 @@ Here's the simple version: **You define the contract before you write any code, 
 
 Not documentation that gets generated from code annotations. Not a Slack conversation about "yeah, just send the customer ID and items." A formal, machine-readable contract that both teams validate against.
 
-For REST APIs, that's OpenAPI 3.0 specs. For event-driven systems, that's Avro or Protobuf schemas with Schema Registry. For databases, that's Flyway migrations that version your schema changes.
+For REST APIs, that's OpenAPI 3.0+ specs. For event-driven systems, that's Avro or Protobuf schemas with Schema Registry. For databases, that's Flyway migrations that version your schema changes.
 
 The mental shift is this: The contract isn't documentation. **The contract is the design specification that generates your code, mocks, tests, and docs.**
 
@@ -67,7 +67,7 @@ Here's what I learned: Writing a good contract forces you to think through every
 This is the contract I wrote (simplified for this article):
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.0+
 info:
   title: Orders API
   version: 1.0.0
@@ -617,6 +617,6 @@ Thanks for reading! If this helped you understand contract-first integration, gi
 
 Need more tech insights?
 
-Check out my [GitHub](https://github.com/wallaceespindola), [LinkedIn](https://www.linkedin.com/in/wallaceespindola/), and [Speaker Deck](https://speakerdeck.com/wallaceespindola).
+Check out my [GitHub](https://github.com/wallaceespindola), [LinkedIn](https://www.linkedin.com/in/wallaceespindola/), and [Speaker Deck](https://speakerdeck.com/wallacese).
 
 Happy coding!

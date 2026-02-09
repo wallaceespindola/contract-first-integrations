@@ -1,0 +1,750 @@
+{
+  "info": {
+    "name": "Contract-First Integrations API",
+    "description": "Complete API collection for testing Contract-First Integrations REST endpoints.\n\n**Features:**\n- Orders API (create, get, idempotency)\n- Actuator endpoints (health, info, metrics)\n- OpenAPI documentation endpoints\n- Validation and error handling tests\n\n**Author:** Wallace Espindola\n**Version:** 1.0.0\n**Base URL:** http://localhost:8080",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "orderId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "idempotencyKey",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Orders API",
+      "item": [
+        {
+          "name": "Create Order - Success",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Generate unique idempotency key",
+                  "const timestamp = new Date().getTime();",
+                  "const randomId = Math.random().toString(36).substring(7);",
+                  "const idempotencyKey = `test-${timestamp}-${randomId}`;",
+                  "pm.collectionVariables.set('idempotencyKey', idempotencyKey);",
+                  "",
+                  "console.log('Generated idempotency key:', idempotencyKey);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 201 Created', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "// Test response structure",
+                  "pm.test('Response has correct structure', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('orderId');",
+                  "    pm.expect(jsonData).to.have.property('customerId');",
+                  "    pm.expect(jsonData).to.have.property('status');",
+                  "    pm.expect(jsonData).to.have.property('items');",
+                  "    pm.expect(jsonData).to.have.property('timestamp');",
+                  "});",
+                  "",
+                  "// Test response values",
+                  "pm.test('Response has correct values', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.customerId).to.equal('CUST-123');",
+                  "    pm.expect(jsonData.status).to.equal('CREATED');",
+                  "    pm.expect(jsonData.items).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "// Save orderId for subsequent requests",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData.orderId) {",
+                  "    pm.collectionVariables.set('orderId', jsonData.orderId);",
+                  "    console.log('Saved orderId:', jsonData.orderId);",
+                  "}",
+                  "",
+                  "// Test timestamp format (ISO-8601)",
+                  "pm.test('Timestamp is in ISO-8601 format', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    const timestamp = jsonData.timestamp;",
+                  "    pm.expect(timestamp).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}/);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"CUST-123\",\n  \"idempotencyKey\": \"{{idempotencyKey}}\",\n  \"items\": [\n    {\n      \"sku\": \"SKU-001\",\n      \"quantity\": 2\n    },\n    {\n      \"sku\": \"SKU-002\",\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders"]
+            },
+            "description": "Creates a new order with idempotency support. Returns 201 Created with the order details."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order - Idempotency (Same Request)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code (should be 201 or 200 depending on implementation)",
+                  "pm.test('Status code is 2xx', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  "",
+                  "// Test that we get the same orderId back",
+                  "pm.test('Returns same orderId (idempotency working)', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    const savedOrderId = pm.collectionVariables.get('orderId');",
+                  "    pm.expect(jsonData.orderId).to.equal(savedOrderId);",
+                  "    console.log('Idempotency test passed - same orderId returned:', jsonData.orderId);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"CUST-123\",\n  \"idempotencyKey\": \"{{idempotencyKey}}\",\n  \"items\": [\n    {\n      \"sku\": \"SKU-001\",\n      \"quantity\": 2\n    },\n    {\n      \"sku\": \"SKU-002\",\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders"]
+            },
+            "description": "Tests idempotency by sending the exact same request. Should return the same order (same orderId)."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order - Idempotency Conflict",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 409 Conflict', function () {",
+                  "    pm.response.to.have.status(409);",
+                  "});",
+                  "",
+                  "// Test error response structure",
+                  "pm.test('Error response has correct structure', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('code');",
+                  "    pm.expect(jsonData).to.have.property('message');",
+                  "    pm.expect(jsonData).to.have.property('traceId');",
+                  "    pm.expect(jsonData).to.have.property('timestamp');",
+                  "});",
+                  "",
+                  "// Test error code",
+                  "pm.test('Error code is CONFLICT', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.code).to.equal('CONFLICT');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"CUST-DIFFERENT\",\n  \"idempotencyKey\": \"{{idempotencyKey}}\",\n  \"items\": [\n    {\n      \"sku\": \"SKU-999\",\n      \"quantity\": 99\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders"]
+            },
+            "description": "Tests idempotency conflict - same key but different payload. Should return 409 Conflict."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order - Validation Error (Missing CustomerId)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 400 Bad Request', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "",
+                  "// Test error code",
+                  "pm.test('Error code is VALIDATION_ERROR', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.code).to.equal('VALIDATION_ERROR');",
+                  "});",
+                  "",
+                  "// Test validation details",
+                  "pm.test('Validation error mentions customerId', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    const message = JSON.stringify(jsonData).toLowerCase();",
+                  "    pm.expect(message).to.include('customerid');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": null,\n  \"items\": [\n    {\n      \"sku\": \"SKU-001\",\n      \"quantity\": 2\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders"]
+            },
+            "description": "Tests validation - missing customerId. Should return 400 Bad Request with VALIDATION_ERROR."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Order - Validation Error (Empty Items)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 400 Bad Request', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "",
+                  "// Test error code",
+                  "pm.test('Error code is VALIDATION_ERROR', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.code).to.equal('VALIDATION_ERROR');",
+                  "});",
+                  "",
+                  "// Test validation details",
+                  "pm.test('Validation error mentions items', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    const message = JSON.stringify(jsonData).toLowerCase();",
+                  "    pm.expect(message).to.include('items');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"CUST-123\",\n  \"items\": []\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders"]
+            },
+            "description": "Tests validation - empty items array. Should return 400 Bad Request with VALIDATION_ERROR."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Order - Success",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test response structure",
+                  "pm.test('Response has correct structure', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('orderId');",
+                  "    pm.expect(jsonData).to.have.property('customerId');",
+                  "    pm.expect(jsonData).to.have.property('status');",
+                  "    pm.expect(jsonData).to.have.property('items');",
+                  "    pm.expect(jsonData).to.have.property('timestamp');",
+                  "});",
+                  "",
+                  "// Test orderId matches",
+                  "pm.test('OrderId matches requested order', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    const requestedOrderId = pm.collectionVariables.get('orderId');",
+                  "    pm.expect(jsonData.orderId).to.equal(requestedOrderId);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders/{{orderId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders", "{{orderId}}"]
+            },
+            "description": "Retrieves an order by ID. Uses the orderId saved from the Create Order request."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Order - Not Found",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 404 Not Found', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "",
+                  "// Test error response structure",
+                  "pm.test('Error response has correct structure', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('code');",
+                  "    pm.expect(jsonData).to.have.property('message');",
+                  "    pm.expect(jsonData).to.have.property('traceId');",
+                  "    pm.expect(jsonData).to.have.property('timestamp');",
+                  "});",
+                  "",
+                  "// Test error code",
+                  "pm.test('Error code is NOT_FOUND', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.code).to.equal('NOT_FOUND');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders/ORD-NONEXISTENT-99999",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders", "ORD-NONEXISTENT-99999"]
+            },
+            "description": "Tests 404 response when requesting a non-existent order."
+          },
+          "response": []
+        }
+      ],
+      "description": "Orders REST API endpoints for creating and retrieving orders with idempotency support."
+    },
+    {
+      "name": "Actuator Endpoints",
+      "item": [
+        {
+          "name": "Health Check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test response structure",
+                  "pm.test('Response has status property', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('status');",
+                  "});",
+                  "",
+                  "// Test health status",
+                  "pm.test('Application status is UP', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.equal('UP');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/actuator/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["actuator", "health"]
+            },
+            "description": "Returns the health status of the application including database connectivity and disk space."
+          },
+          "response": []
+        },
+        {
+          "name": "Application Info",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test response structure",
+                  "pm.test('Response has app information', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('app');",
+                  "});",
+                  "",
+                  "// Test app properties",
+                  "pm.test('App info contains name and version', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.app).to.have.property('name');",
+                  "    pm.expect(jsonData.app).to.have.property('version');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/actuator/info",
+              "host": ["{{baseUrl}}"],
+              "path": ["actuator", "info"]
+            },
+            "description": "Returns application information including name, version, description, and author details."
+          },
+          "response": []
+        },
+        {
+          "name": "Metrics - List All",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test response structure",
+                  "pm.test('Response has names array', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('names');",
+                  "    pm.expect(jsonData.names).to.be.an('array');",
+                  "});",
+                  "",
+                  "// Test common metrics exist",
+                  "pm.test('Common metrics are available', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.names).to.include('jvm.memory.used');",
+                  "    pm.expect(jsonData.names).to.include('system.cpu.usage');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/actuator/metrics",
+              "host": ["{{baseUrl}}"],
+              "path": ["actuator", "metrics"]
+            },
+            "description": "Lists all available metrics (JVM, system, HTTP, etc.)."
+          },
+          "response": []
+        },
+        {
+          "name": "Metrics - HTTP Server Requests",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test response structure",
+                  "pm.test('Response has metric data', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('name');",
+                  "    pm.expect(jsonData).to.have.property('measurements');",
+                  "});",
+                  "",
+                  "// Test metric name",
+                  "pm.test('Metric name is http.server.requests', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.name).to.equal('http.server.requests');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/actuator/metrics/http.server.requests",
+              "host": ["{{baseUrl}}"],
+              "path": ["actuator", "metrics", "http.server.requests"]
+            },
+            "description": "Returns detailed metrics for HTTP server requests including count, sum, and max."
+          },
+          "response": []
+        },
+        {
+          "name": "Metrics - JVM Memory Used",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test metric name",
+                  "pm.test('Metric name is jvm.memory.used', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.name).to.equal('jvm.memory.used');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/actuator/metrics/jvm.memory.used",
+              "host": ["{{baseUrl}}"],
+              "path": ["actuator", "metrics", "jvm.memory.used"]
+            },
+            "description": "Returns JVM memory usage metrics."
+          },
+          "response": []
+        }
+      ],
+      "description": "Spring Boot Actuator endpoints for monitoring application health, info, and metrics."
+    },
+    {
+      "name": "OpenAPI Documentation",
+      "item": [
+        {
+          "name": "OpenAPI JSON Specification",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test status code",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test response structure",
+                  "pm.test('Response is valid OpenAPI spec', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('openapi');",
+                  "    pm.expect(jsonData).to.have.property('info');",
+                  "    pm.expect(jsonData).to.have.property('paths');",
+                  "});",
+                  "",
+                  "// Test OpenAPI version",
+                  "pm.test('OpenAPI version is 3.x', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.openapi).to.match(/^3\\./);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v3/api-docs",
+              "host": ["{{baseUrl}}"],
+              "path": ["v3", "api-docs"]
+            },
+            "description": "Returns the complete OpenAPI 3.0 specification in JSON format."
+          },
+          "response": []
+        },
+        {
+          "name": "Swagger UI (HTML)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/swagger-ui.html",
+              "host": ["{{baseUrl}}"],
+              "path": ["swagger-ui.html"]
+            },
+            "description": "Interactive Swagger UI for API documentation and testing.\n\n**Note:** This returns HTML content, open in browser: http://localhost:8080/swagger-ui.html"
+          },
+          "response": []
+        }
+      ],
+      "description": "OpenAPI/Swagger documentation endpoints."
+    },
+    {
+      "name": "Integration Tests",
+      "item": [
+        {
+          "name": "Full Workflow Test",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Generate unique test data",
+                  "const timestamp = new Date().getTime();",
+                  "const testKey = `integration-test-${timestamp}`;",
+                  "pm.collectionVariables.set('integrationTestKey', testKey);",
+                  "",
+                  "console.log('Starting integration test with key:', testKey);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test 1: Health check passes",
+                  "pm.sendRequest({",
+                  "    url: pm.collectionVariables.get('baseUrl') + '/actuator/health',",
+                  "    method: 'GET'",
+                  "}, function (err, response) {",
+                  "    pm.test('Health check is UP', function () {",
+                  "        pm.expect(response.json().status).to.equal('UP');",
+                  "    });",
+                  "});",
+                  "",
+                  "// Test 2: Create order succeeds",
+                  "pm.test('Order created successfully', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "// Test 3: Save order ID and verify retrieval",
+                  "const orderId = pm.response.json().orderId;",
+                  "pm.collectionVariables.set('integrationTestOrderId', orderId);",
+                  "",
+                  "setTimeout(function() {",
+                  "    pm.sendRequest({",
+                  "        url: pm.collectionVariables.get('baseUrl') + '/v1/orders/' + orderId,",
+                  "        method: 'GET'",
+                  "    }, function (err, response) {",
+                  "        pm.test('Order can be retrieved', function () {",
+                  "            pm.expect(response.code).to.equal(200);",
+                  "            pm.expect(response.json().orderId).to.equal(orderId);",
+                  "        });",
+                  "    });",
+                  "}, 100);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"CUST-INTEGRATION-TEST\",\n  \"idempotencyKey\": \"{{integrationTestKey}}\",\n  \"items\": [\n    {\n      \"sku\": \"SKU-TEST-001\",\n      \"quantity\": 5\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "orders"]
+            },
+            "description": "Complete integration test: health check -> create order -> retrieve order"
+          },
+          "response": []
+        }
+      ],
+      "description": "End-to-end integration tests that verify complete workflows."
+    }
+  ]
+}

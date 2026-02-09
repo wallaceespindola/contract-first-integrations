@@ -1,18 +1,17 @@
 package com.example.contractfirst.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * JPA entity for orders table.
  *
- * Maps to contract: contracts/db/flyway/V1__create_orders.sql
+ * <p>Maps to contract: contracts/db/flyway/V1__create_orders.sql
  *
  * @author Wallace Espindola
  */
@@ -23,29 +22,33 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderEntity {
 
-    @Id
-    @Column(name = "id", length = 32)
-    private String id;
+  @Id
+  @Column(name = "id", length = 32)
+  private String id;
 
-    @Column(name = "customer_id", length = 32, nullable = false)
-    private String customerId;
+  @Column(name = "customer_id", length = 32, nullable = false)
+  private String customerId;
 
-    @Column(name = "status", length = 16, nullable = false)
-    private String status;
+  @Column(name = "status", length = 16, nullable = false)
+  private String status;
 
-    @Column(name = "source", length = 32)
-    private String source; // Added in V2 migration (backward compatible)
+  @Column(name = "source", length = 32)
+  private String source; // Added in V2 migration (backward compatible)
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+  @Column(name = "created_at", nullable = false)
+  private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<OrderItemEntity> items = new ArrayList<>();
+  @OneToMany(
+      mappedBy = "orderId",
+      cascade = CascadeType.ALL,
+      orphanRemoval = true,
+      fetch = FetchType.LAZY)
+  private List<OrderItemEntity> items = new ArrayList<>();
 
-    @PrePersist
-    protected void onCreate() {
-        if (createdAt == null) {
-            createdAt = LocalDateTime.now();
-        }
+  @PrePersist
+  protected void onCreate() {
+    if (createdAt == null) {
+      createdAt = LocalDateTime.now();
     }
+  }
 }
