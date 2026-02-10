@@ -10,7 +10,7 @@ After implementing contract-first integration across three different microservic
 
 Contract-first development flips this model. By defining your integration contracts upfront (OpenAPI specs, Avro schemas, database migrations), you enable teams to work in parallel, catch breaking changes early through CI validation, and treat contracts as the single source of truth. This isn't theoretical—this is how Netflix, Uber, and Amazon scale their engineering organizations.
 
-In this article, I'll show you production-ready contract-first patterns using Spring Boot 3+, OpenAPI 3.0+, Apache Kafka with Avro, and Flyway migrations. You'll see real code from a working system that handles the three critical integration boundaries: REST APIs, event-driven messaging, and database schemas.
+In this article, I'll show you production-ready contract-first patterns using Java 21, Spring Boot 3, OpenAPI 3, Apache Kafka with Avro, and Flyway migrations. You'll see real code from a working system that handles the three critical integration boundaries: REST APIs, event-driven messaging, and database schemas.
 
 ## The Problem: Why Traditional Integration Fails at Scale
 
@@ -43,7 +43,7 @@ Here's the mental model: **Agree on the contract → generate tools → build in
 
 ## Contract Type 1: REST API Contracts With OpenAPI
 
-OpenAPI 3.0 specs are the gold standard for REST API contracts. You define endpoints, request/response schemas, validation rules, and error responses in YAML. Then you generate server stubs, client SDKs, mocks, and documentation from that single source.
+OpenAPI 3 specs are the gold standard for REST API contracts. You define endpoints, request/response schemas, validation rules, and error responses in YAML. Then you generate server stubs, client SDKs, mocks, and documentation from that single source.
 
 ### OpenAPI Contract Example
 
