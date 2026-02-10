@@ -1,10 +1,25 @@
 # Contract-First Integrations
 
+
+![Java](https://img.shields.io/badge/Built_with-Java21-blue)
+![Junit5](https://img.shields.io/badge/Tested_with-Junit5-teal)
+![Spring](https://img.shields.io/badge/Structured_by-SpringBoot-lemon)
+![Maven](https://img.shields.io/badge/Powered_by-Maven-pink)
+![Swagger](https://img.shields.io/badge/Docs_by-Swagger-yellow)
+![OpenAPI](https://img.shields.io/badge/Specs_by-OpenAPI-purple)
+![Kafka](https://img.shields.io/badge/Events_by-Kafka-brown)
+![Avro](https://img.shields.io/badge/Schemas_by-Avro-darkgreen)
 [![CI](https://github.com/wallaceespindola/contract-first-integrations/actions/workflows/ci.yml/badge.svg)](https://github.com/wallaceespindola/contract-first-integrations/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/wallaceespindola/contract-first-integrations/actions/workflows/codeql.yml/badge.svg)](https://github.com/wallaceespindola/contract-first-integrations/actions/workflows/codeql.yml)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Reference implementation demonstrating **contract-first** (API-first / schema-first) development patterns for systems integration.
+## Introduction
+
+Reference implementation demonstrating **contract-first** (API-first / schema-first) development patterns for systems integration. 
+
+For that purpose, we will build a simple order management system with the following technologies: Apache Kafka for event streaming, PostgreSQL for data persistence, Apache Avro for event serialization, Confluent Schema Registry for schema governance,  and Spring Boot for the application layer. 
+
+The project emphasizes best practices in API design, schema evolution, idempotency, and error handling.
 
 ## 🎯 What is Contract-First?
 
