@@ -2,7 +2,7 @@
 
 ## How to design scalable integration contracts with OpenAPI, Kafka Avro, and database migrations in enterprise Java systems
 
-![Enterprise Contract-First Architecture](./images/javapro-featured-contract-first.png)
+![Enterprise Contract-First Architecture](../images/javapro-featured-contract-first.png)
 
 **Abstract:** This article presents production-tested contract-first integration patterns for enterprise Java microservices built with Spring Boot 3, Apache Kafka with Confluent Schema Registry, and Flyway database migrations. We examine architectural trade-offs, demonstrate advanced patterns for idempotency and schema evolution, and provide metrics from real-world implementations at scale.
 

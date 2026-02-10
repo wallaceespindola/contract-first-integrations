@@ -179,7 +179,7 @@ Delete the slide content between `---` separators in `slides-content.md` and reg
 
 ## Source Material
 
-Based on `/docs/context.md` which contains comprehensive documentation about:
+Contains comprehensive documentation about:
 - Contract-first development philosophy
 - OpenAPI specifications for REST APIs
 - Apache Avro schemas for Kafka events

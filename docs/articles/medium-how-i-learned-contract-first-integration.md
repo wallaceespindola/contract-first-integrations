@@ -2,7 +2,7 @@
 
 ## The costly integration failure that taught me why contracts matter more than code
 
-![Contract-First Integration Journey](./images/medium-featured-contract-first.png)
+![Contract-First Integration Journey](../images/medium-featured-contract-first.png)
 
 Three years ago, I was responsible for integrating our order management system with a new billing service. Both teams were moving fast. We were on a tight deadline. And I made a decision that would delay our launch by six weeks and consume weeks of engineering time debugging preventable issues.
 

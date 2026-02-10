@@ -2,7 +2,7 @@
 
 ## Why the best engineering teams define contracts before code (and what they learned the hard way)
 
-![Contract-First Integration Insights](./images/substack-featured-contract-first.svg)
+![Contract-First Integration Insights](../images/substack-featured-contract-first.png)
 
 *Today we're exploring contract-first integration—a pattern that separates high-performing engineering organizations from those constantly fighting integration fires.*
 

@@ -1,6 +1,6 @@
 # Why Senior Engineers Choose Contract-First Integration (And Why You Should Too)
 
-![Contract-First Integration Professional](./images/linkedin-featured-contract-first.png)
+![Contract-First Integration Professional](../images/linkedin-featured-contract-first.png)
 
 In code reviews, I see junior engineers struggle with the same decision: Should we define API contracts before we write code, or just start building and document later?
 

@@ -2,7 +2,7 @@
 
 **How defining contracts before code enables parallel team development and reduces integration risk in distributed systems**
 
-![Contract-First Integration Architecture](./images/dzone-featured-contract-first.png)
+![Contract-First Integration Architecture](../images/dzone-featured-contract-first.png)
 
 ## Introduction
 

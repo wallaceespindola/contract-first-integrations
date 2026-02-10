@@ -2,7 +2,7 @@
 
 ## How explicit contract governance enables organizational scalability in microservices ecosystems
 
-![Contract-First Architecture Analysis](./images/infoq-featured-contract-first.png)
+![Contract-First Architecture Analysis](../images/infoq-featured-contract-first.png)
 
 **Abstract:** This article examines contract-first development as an architectural pattern for managing integration complexity in distributed systems. Drawing from industry implementations and research data, we analyze how explicit contract governance through OpenAPI specifications, Avro schema registries, and database migrations affects team coordination costs, system reliability, and organizational scalability. The analysis includes quantitative data from enterprise implementations and identifies critical architectural trade-offs.
 

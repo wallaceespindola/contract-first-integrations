@@ -29,8 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>Orchestrates: - Idempotency checking (REST API pattern) - Order creation and persistence
  * (database) - Event publishing (Kafka pattern)
  *
- * <p>Maps to contract patterns from docs/context.md lines 481-500
- *
  * @author Wallace Espindola
  */
 @Service
