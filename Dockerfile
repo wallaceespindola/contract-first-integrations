@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy Maven files
 COPY pom.xml .
+COPY checkstyle.xml .
 COPY contracts ./contracts
 
 # Download dependencies (cached if pom.xml unchanged)
