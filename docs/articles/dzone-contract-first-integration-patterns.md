@@ -6,9 +6,9 @@
 
 ## Introduction
 
-After implementing contract-first integration across three different microservices architectures, I've learned that the biggest bottleneck in distributed systems isn't technical—it's coordination between teams. When Team A waits for Team B to finish their API before starting integration work, you're throwing away weeks of productivity.
+After implementing contract-first integration across three different microservices architectures, I've learned that the biggest bottleneck in distributed systems isn't technical, it's coordination between teams. When Team A waits for Team B to finish their API before starting integration work, you're throwing away weeks of productivity.
 
-Contract-first development flips this model. By defining your integration contracts upfront (OpenAPI specs, Avro schemas, database migrations), you enable teams to work in parallel, catch breaking changes early through CI validation, and treat contracts as the single source of truth. This isn't theoretical—this is how Netflix, Uber, and Amazon scale their engineering organizations.
+Contract-first development flips this model. By defining your integration contracts upfront (OpenAPI specs, Avro schemas, database migrations), you enable teams to work in parallel, catch breaking changes early through CI validation, and treat contracts as the single source of truth. This isn't theoretical, this is how Netflix, Uber, and Amazon scale their engineering organizations.
 
 In this article, I'll show you production-ready contract-first patterns using Java 21, Spring Boot 3, OpenAPI 3, Apache Kafka with Avro, and Flyway migrations. You'll see real code from a working system that handles the three critical integration boundaries: REST APIs, event-driven messaging, and database schemas.
 
@@ -29,7 +29,7 @@ Contract-first development solves all three by making the contract the authorita
 
 ## What Contract-First Actually Means
 
-Contract-first means you define the integration boundary first—the *contract*—and then write code that conforms to it. The contract is not an afterthought or generated documentation. It's the design specification.
+Contract-first means you define the integration boundary first (the *contract*) and then write code that conforms to it. The contract is not an afterthought or generated documentation. It's the design specification.
 
 ### A complete contract includes:
 
@@ -227,7 +227,7 @@ Here's where contract-first shines. While your team implements the provider, the
 1. Generate a Java client from the OpenAPI spec using openapi-generator
 2. Run a mock server that returns valid responses based on the contract
 3. Write integration tests against the mock
-4. Switch to the real service when it's ready—no code changes needed
+4. Switch to the real service when it's ready (no code changes needed)
 
 The consumer doesn't wait for you to finish. They develop in parallel.
 
@@ -304,7 +304,7 @@ The Avro schema is your machine-validated contract:
 }
 ```
 
-**Key pattern**: The `source` field is nullable with a default value. This supports backward-compatible evolution—old consumers can read new events, new consumers can read old events.
+**Key pattern**: The `source` field is nullable with a default value. This supports backward-compatible evolution. Old consumers can read new events, new consumers can read old events.
 
 ### Kafka Producer Implementation
 
@@ -533,7 +533,7 @@ spring.kafka.producer.properties.auto.register.schemas=true
 spring.kafka.producer.properties.use.latest.version=true
 ```
 
-When you try to publish an incompatible schema, the producer fails at startup—before reaching production.
+When you try to publish an incompatible schema, the producer fails at startup (before reaching production).
 
 ### Database: Flyway Validation
 
@@ -606,6 +606,8 @@ After implementing contract-first across multiple services (orders, billing, inv
 - Swagger UI always reflects actual API behavior as both derive from the same contract
 - No manual documentation maintenance required
 
+---
+
 ## Common Pitfalls and How to Avoid Them
 
 ### Pitfall 1: Treating contracts as documentation
@@ -637,6 +639,8 @@ After implementing contract-first across multiple services (orders, billing, inv
 **Wrong approach**: Expose internal database schema directly in API contracts.
 
 **Right approach**: Design contracts for consumers, not internal convenience. Use DTOs that map between external contract and internal model.
+
+---
 
 ## When Contract-First Makes Sense
 
@@ -670,7 +674,7 @@ Contract-first isn't always the answer. Use it when:
 
 If you're implementing contract-first integration:
 
-1. Start with one integration—pick your most painful cross-team dependency
+1. Start with one integration, pick your most painful cross-team dependency
 2. Write the OpenAPI spec or Avro schema first, before any implementation
 3. Set up CI validation for that contract (openapi-diff or Schema Registry)
 4. Measure reduction in integration bugs and coordination overhead
@@ -686,8 +690,8 @@ Contract-first isn't a silver bullet, but it transforms integration from a coord
 - OpenAPI 3.0 Specification: [spec.openapis.org](https://spec.openapis.org/oas/latest.html)
 - Confluent Schema Registry: [docs.confluent.io/platform/current/schema-registry](https://docs.confluent.io/platform/current/schema-registry/index.html)
 - Flyway Documentation: [flywaydb.org/documentation](https://flywaydb.org/documentation/)
-- Moesif: Mastering Contract-First API Development: [moesif.com/blog](https://www.moesif.com/blog/technical/api-development/Mastering-Contract-First-API-Development-Key-Strategies-and-Benefits/)
-- Research on Microservices Issues: [arxiv.org/html/2302.01894v4](https://arxiv.org/html/2302.01894v4)
+- Mastering Contract-First API Development: [moesif.com/blog](https://www.moesif.com/blog/technical/api-development/Mastering-Contract-First-API-Development-Key-Strategies-and-Benefits/)
+- Research on Microservices Issues: [arxiv.org](https://arxiv.org/html/2302.01894v4)
 
 ---
 
