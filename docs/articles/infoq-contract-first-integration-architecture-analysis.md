@@ -16,6 +16,8 @@ Contract-first development addresses this coordination problem by inverting the 
 
 This architectural shift transforms integration from a serial dependency chain, where Team A must complete implementation before Team B can begin, into a parallel development model where multiple teams work simultaneously against shared contract specifications.
 
+<img width="1439" height="952" alt="image" src="https://github.com/user-attachments/assets/2f1cc294-c31d-46b4-9ff4-c45debe96a5c" />
+
 ## Contract-First vs Code-First: Architectural Comparison
 
 The fundamental architectural difference between contract-first and code-first approaches lies in where design authority resides.
