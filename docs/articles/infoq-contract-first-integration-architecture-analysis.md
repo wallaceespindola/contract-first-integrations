@@ -14,7 +14,7 @@ As organizations transition from monolithic architectures to microservices, they
 
 Contract-first development addresses this coordination problem by inverting the traditional relationship between implementation and specification. Rather than deriving contracts from implementation (code-first), teams define explicit contracts before implementation and validate code conformance through automated tooling.
 
-This architectural shift transforms integration from a serial dependency chain—where Team A must complete implementation before Team B can begin—into a parallel development model where multiple teams work simultaneously against shared contract specifications.
+This architectural shift transforms integration from a serial dependency chain, where Team A must complete implementation before Team B can begin, into a parallel development model where multiple teams work simultaneously against shared contract specifications.
 
 ## Contract-First vs Code-First: Architectural Comparison
 
@@ -220,7 +220,7 @@ Contract-first requires design decisions before implementation begins. Teams mus
 **Cost**: 2-4 hours of collaborative design per integration boundary
 **Benefit**: Eliminates 2-6 weeks of post-implementation debugging and rework
 
-The break-even point occurs when design coordination cost exceeds post-implementation integration cost—typically at 2+ teams with different release schedules.
+The break-even point occurs when design coordination cost exceeds post-implementation integration cost, typically at 2+ teams with different release schedules.
 
 ### Trade-Off 2: Contract Rigidity vs Implementation Flexibility
 
