@@ -10,7 +10,7 @@
 
 ## Introduction
 
-In enterprise microservices architectures, integration boundaries are the primary source of operational risk. Research analyzing thousands of issues across microservices systems has found that service communication and integration failures represent a substantial category of operational problems, with integration mismatches being a common source of production incidents.
+In enterprise microservices architectures, integration boundaries are the primary source of operational risk. Organizations consistently observe that service communication and integration failures represent a substantial category of operational problems, with integration mismatches being a common source of production incidents.
 
 Contract-first development addresses this by treating integration contracts as first-class architectural artifacts. Rather than allowing contracts to emerge implicitly from implementation details, we define them explicitly using industry-standard specifications (OpenAPI 3.0 for REST, Avro for events, Flyway for databases) and enforce them through automated validation in the CI/CD pipeline.
 
@@ -20,7 +20,7 @@ This article presents a comprehensive architecture for contract-first integratio
 
 ### Principle 1: Contracts as Design Specifications
 
-The contract is not generated documentation—it is the authoritative design specification from which code, tests, mocks, and documentation are derived.
+The contract is not generated documentation. It is the authoritative design specification from which code, tests, mocks, and documentation are derived.
 
 **Traditional approach (code-first):**
 ```
@@ -1036,7 +1036,7 @@ Contract-first integration architecture transforms distributed systems developme
 3. **Explicit evolution**: Schema compatibility policies enforced programmatically
 4. **Operational resilience**: Idempotency and retry semantics baked into contracts
 
-The patterns presented—OpenAPI for REST, Avro with Schema Registry for events, and Flyway for databases—provide a complete framework for enterprise Java microservices integration.
+The patterns presented (OpenAPI for REST, Avro with Schema Registry for events, and Flyway for databases) provide a complete framework for enterprise Java microservices integration.
 
 ## References
 
@@ -1045,14 +1045,14 @@ The patterns presented—OpenAPI for REST, Avro with Schema Registry for events,
 3. Confluent Schema Registry: [https://docs.confluent.io/platform/current/schema-registry/](https://docs.confluent.io/platform/current/schema-registry/)
 4. Flyway Database Migrations: [https://flywaydb.org/documentation/](https://flywaydb.org/documentation/)
 5. Spring Kafka Documentation: [https://spring.io/projects/spring-kafka](https://spring.io/projects/spring-kafka)
-6. Zhang, Y., et al. "Understanding the Issues, Their Causes and Solutions in Microservices Systems: An Empirical Study." arXiv:2302.01894v4, 2023. [https://arxiv.org/html/2302.01894v4](https://arxiv.org/html/2302.01894v4)
-7. Moesif. "Mastering Contract-First API Development: Key Strategies and Benefits." 2024. [https://www.moesif.com/blog/technical/api-development/Mastering-Contract-First-API-Development-Key-Strategies-and-Benefits/](https://www.moesif.com/blog/technical/api-development/Mastering-Contract-First-API-Development-Key-Strategies-and-Benefits/)
+6. Mastering Contract-First API Development: [moesif.com/blog](https://www.moesif.com/blog/technical/api-development/Mastering-Contract-First-API-Development-Key-Strategies-and-Benefits/)
+7. Research on Microservices Issues: [arxiv.org](https://arxiv.org/html/2302.01894v4)
 
 ---
 
 **Source Code:** Complete working implementation available at [github.com/wallaceespindola/contract-first-integrations](https://github.com/wallaceespindola/contract-first-integrations)
 
-- **Author:** Wallace Espindola - Software Engineer Sr. / Solution Architect / Java & Python Dev
+- **Author:** Wallace Espindola - Software Engineer Sr. / Solution Architect
 - **Contact:** [wallace.espindola@gmail.com](mailto:wallace.espindola@gmail.com)
 - **LinkedIn:** [linkedin.com/in/wallaceespindola](https://www.linkedin.com/in/wallaceespindola/)
 - **GitHub:** [github.com/wallaceespindola](https://github.com/wallaceespindola/)
@@ -1060,4 +1060,4 @@ The patterns presented—OpenAPI for REST, Avro with Schema Registry for events,
 
 ---
 
-*This article originally appeared in JavaPro Magazine, Issue XX, 2026.*
+*This article originally appeared in JavaPro Magazine, 2026.*

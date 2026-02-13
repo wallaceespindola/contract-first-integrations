@@ -10,7 +10,7 @@
 
 ## Introduction: The Coordination Problem in Distributed Systems
 
-As organizations transition from monolithic architectures to microservices, they often discover that the primary bottleneck shifts from technical constraints to coordination overhead. Research analyzing over 2,600 issues across 15 open-source microservices systems found that service communication and integration failures represent a substantial category of operational problems, with integration mismatches being a common source of production incidents.
+As organizations transition from monolithic architectures to microservices, they often discover that the primary bottleneck shifts from technical constraints to coordination overhead. In practice, organizations consistently observe that service communication and integration failures represent a substantial category of operational problems, with integration mismatches being a common source of production incidents.
 
 Contract-first development addresses this coordination problem by inverting the traditional relationship between implementation and specification. Rather than deriving contracts from implementation (code-first), teams define explicit contracts before implementation and validate code conformance through automated tooling.
 
@@ -209,7 +209,7 @@ Teams adopting contract-first approaches across multiple microservices architect
 - Documentation generated from contracts stays synchronized with implementation by design
 
 **Operational Impact:**
-The financial impact of integration failures can be substantial. Research has documented that major cloud service outages can result in billions of dollars in economic impact. Contract-first development reduces the likelihood of such failures by enforcing compatibility before deployment.
+Contract-first development reduces the likelihood of integration failures by enforcing compatibility before deployment, preventing cascading failure modes that can affect entire service ecosystems.
 
 ## Architectural Trade-Offs and Adoption Barriers
 
@@ -219,8 +219,8 @@ Contract-first architecture introduces specific trade-offs that organizations mu
 
 Contract-first requires design decisions before implementation begins. Teams must specify request/response structures, error taxonomies, and operational semantics upfront.
 
-**Cost**: 2-4 hours of collaborative design per integration boundary
-**Benefit**: Eliminates 2-6 weeks of post-implementation debugging and rework
+**Cost**: Collaborative design per integration boundary
+**Benefit**: Eliminates post-implementation debugging and rework
 
 The break-even point occurs when design coordination cost exceeds post-implementation integration cost, typically at 2+ teams with different release schedules.
 
@@ -242,7 +242,7 @@ Contract-first requires automated tooling for validation, code generation, and c
 
 **Coordination costs eliminated**: Cross-team meetings, manual testing, integration debugging sessions
 
-The tooling investment pays off at approximately 5+ microservices or 15+ engineers.
+Tooling investment typically provides return-on-investment in organizations with multiple microservices or distributed engineering teams.
 
 ## CI/CD Enforcement Patterns
 
@@ -303,9 +303,7 @@ Contract-first makes integration contracts explicit and versioned, enabling true
 
 ### Communication Overhead
 
-Metcalfe's Law suggests coordination overhead grows quadratically with team count (O(n²)). In a 10-team organization, that's 45 potential integration paths.
-
-Contract-first reduces this to O(n) by replacing bilateral coordination with contract governance. Teams coordinate through the contract, not with each other.
+In distributed systems, coordination overhead grows significantly with team count. Contract-first reduces this burden by replacing bilateral coordination with contract governance. Teams coordinate through the contract specifications rather than through ad-hoc meetings.
 
 ### Decision Authority
 
