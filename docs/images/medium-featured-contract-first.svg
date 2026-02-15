@@ -1,96 +1,194 @@
-<svg width="1200" height="627" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="mediumBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    <!-- Warm gradient background -->
+    <linearGradient id="warmBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1b4b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#581c87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#831843;stop-opacity:1" />
     </linearGradient>
 
-    <linearGradient id="chaosGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#f03e3e;stop-opacity:0.7" />
-      <stop offset="100%" style="stop-color:#c92a2a;stop-opacity:0.7" />
+    <!-- Purple accent gradient -->
+    <linearGradient id="purpleAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
     </linearGradient>
 
-    <linearGradient id="orderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:0.7" />
-      <stop offset="100%" style="stop-color:#2f9e44;stop-opacity:0.7" />
+    <!-- Pink accent gradient -->
+    <linearGradient id="pinkAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f472b6;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0.9" />
     </linearGradient>
+
+    <!-- Blue accent gradient -->
+    <linearGradient id="blueAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Stronger glow for focal elements -->
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <rect width="1200" height="627" fill="url(#mediumBg)"/>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#warmBgGradient)"/>
 
-  <!-- Dividing line -->
-  <line x1="600" y1="100" x2="600" y2="527" stroke="#dee2e6" stroke-width="2"/>
+  <!-- Decorative flowing curves in background (representing journey/growth) -->
+  <path d="M 0,400 Q 300,300 600,350 T 1200,300"
+        stroke="url(#purpleAccent)"
+        stroke-width="2"
+        fill="none"
+        opacity="0.3"/>
+  <path d="M 0,450 Q 300,380 600,420 T 1200,380"
+        stroke="url(#pinkAccent)"
+        stroke-width="2"
+        fill="none"
+        opacity="0.25"/>
+  <path d="M 0,500 Q 300,430 600,470 T 1200,430"
+        stroke="url(#blueAccent)"
+        stroke-width="2"
+        fill="none"
+        opacity="0.2"/>
 
-  <!-- Left side: BEFORE (Chaos) -->
-  <g>
-    <text x="300" y="70" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#343a40">BEFORE</text>
-    <text x="300" y="100" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#868e96">Code-First Chaos</text>
+  <!-- Abstract "learning curve" path with dots (representing milestones) -->
+  <g transform="translate(150, 200)">
+    <!-- Starting point (struggle) -->
+    <circle cx="0" cy="80" r="12" fill="url(#pinkAccent)" filter="url(#softGlow)" opacity="0.9"/>
+    <path d="M 0,80 Q 100,100 200,60"
+          stroke="url(#pinkAccent)"
+          stroke-width="3"
+          fill="none"
+          opacity="0.6"
+          stroke-dasharray="5,5"/>
 
-    <!-- Tangled connections -->
-    <g opacity="0.6">
-      <ellipse cx="200" cy="250" rx="50" ry="35" fill="url(#chaosGrad)" stroke="#c92a2a" stroke-width="2"/>
-      <ellipse cx="400" cy="250" rx="50" ry="35" fill="url(#chaosGrad)" stroke="#c92a2a" stroke-width="2"/>
-      <ellipse cx="300" cy="400" rx="50" ry="35" fill="url(#chaosGrad)" stroke="#c92a2a" stroke-width="2"/>
+    <!-- Learning milestone -->
+    <circle cx="200" cy="60" r="14" fill="url(#purpleAccent)" filter="url(#softGlow)" opacity="0.95"/>
+    <path d="M 200,60 Q 300,20 400,40"
+          stroke="url(#purpleAccent)"
+          stroke-width="3"
+          fill="none"
+          opacity="0.6"
+          stroke-dasharray="5,5"/>
 
-      <!-- Messy connections -->
-      <path d="M 250 250 Q 300 200 350 250" stroke="#f03e3e" stroke-width="3" fill="none"/>
-      <path d="M 250 250 Q 200 350 250 400" stroke="#f03e3e" stroke-width="3" fill="none"/>
-      <path d="M 400 250 Q 450 350 350 400" stroke="#f03e3e" stroke-width="3" fill="none"/>
-      <path d="M 200 250 Q 150 400 250 400" stroke="#f03e3e" stroke-width="3" fill="none"/>
-      <path d="M 400 250 Q 300 300 300 360" stroke="#f03e3e" stroke-width="3" fill="none"/>
+    <!-- Mastery point (brighter, larger) -->
+    <circle cx="400" cy="40" r="16" fill="url(#blueAccent)" filter="url(#strongGlow)">
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Central focal element: Abstract representation of integration/connection -->
+  <g transform="translate(750, 250)">
+    <!-- Central hub (contract) -->
+    <circle cx="0" cy="0" r="40" fill="url(#purpleAccent)" filter="url(#strongGlow)" opacity="0.95"/>
+    <circle cx="0" cy="0" r="25" fill="#ffffff" opacity="0.2"/>
+    <circle cx="0" cy="0" r="12" fill="#ffffff" opacity="0.4"/>
+
+    <!-- Connected nodes (services/teams) -->
+    <g opacity="0.85">
+      <!-- Top node -->
+      <circle cx="0" cy="-100" r="20" fill="url(#pinkAccent)" filter="url(#softGlow)"/>
+      <line x1="0" y1="-40" x2="0" y2="-80" stroke="url(#pinkAccent)" stroke-width="2" opacity="0.6"/>
+
+      <!-- Right node -->
+      <circle cx="100" cy="0" r="20" fill="url(#blueAccent)" filter="url(#softGlow)"/>
+      <line x1="40" y1="0" x2="80" y2="0" stroke="url(#blueAccent)" stroke-width="2" opacity="0.6"/>
+
+      <!-- Bottom node -->
+      <circle cx="0" cy="100" r="20" fill="url(#purpleAccent)" filter="url(#softGlow)"/>
+      <line x1="0" y1="40" x2="0" y2="80" stroke="url(#purpleAccent)" stroke-width="2" opacity="0.6"/>
+
+      <!-- Left node -->
+      <circle cx="-100" cy="0" r="20" fill="url(#pinkAccent)" filter="url(#softGlow)"/>
+      <line x1="-40" y1="0" x2="-80" y2="0" stroke="url(#pinkAccent)" stroke-width="2" opacity="0.6"/>
     </g>
 
-    <!-- Labels -->
-    <text x="200" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">API</text>
-    <text x="400" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Service</text>
-    <text x="300" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Events</text>
-
-    <!-- Problem indicators -->
-    <text x="300" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#c92a2a">❌ Mismatched assumptions</text>
-    <text x="300" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#c92a2a">❌ Integration bugs</text>
-    <text x="300" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#c92a2a">❌ Blocked teams</text>
+    <!-- Pulse animation on central hub -->
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.6">
+      <animate attributeName="r" values="40;55;40" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
   </g>
 
-  <!-- Right side: AFTER (Order) -->
-  <g>
-    <text x="900" y="70" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#2f9e44">AFTER</text>
-    <text x="900" y="100" text-anchor="middle" font-family="Georgia, serif" font-size="16" fill="#37b24d">Contract-First Order</text>
-
-    <!-- Central contract -->
-    <rect x="850" y="280" width="100" height="70" rx="8" fill="#4c6ef5" stroke="#364fc7" stroke-width="2"/>
-    <text x="900" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">CONTRACT</text>
-    <text x="900" y="328" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#ffffff">OpenAPI</text>
-
-    <!-- Clean service nodes -->
-    <circle cx="750" cy="200" r="35" fill="url(#orderGrad)" stroke="#2f9e44" stroke-width="2"/>
-    <text x="750" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff">API</text>
-
-    <circle cx="1050" cy="200" r="35" fill="url(#orderGrad)" stroke="#2f9e44" stroke-width="2"/>
-    <text x="1050" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff">Client</text>
-
-    <circle cx="900" cy="450" r="35" fill="url(#orderGrad)" stroke="#2f9e44" stroke-width="2"/>
-    <text x="900" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ffffff">Events</text>
-
-    <!-- Clean connections -->
-    <line x1="770" y1="227" x2="870" y2="295" stroke="#4c6ef5" stroke-width="2" stroke-dasharray="5,3" opacity="0.7"/>
-    <line x1="1030" y1="227" x2="930" y2="295" stroke="#4c6ef5" stroke-width="2" stroke-dasharray="5,3" opacity="0.7"/>
-    <line x1="900" y1="350" x2="900" y2="415" stroke="#4c6ef5" stroke-width="2" stroke-dasharray="5,3" opacity="0.7"/>
-
-    <!-- Success indicators -->
-    <text x="900" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#2f9e44">✓ Parallel development</text>
-    <text x="900" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#2f9e44">✓ Zero integration bugs</text>
-    <text x="900" y="520" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#2f9e44">✓ Team autonomy</text>
+  <!-- Floating abstract shapes (representing concepts/patterns) -->
+  <g opacity="0.4">
+    <rect x="100" y="100" width="60" height="60" rx="8"
+          fill="none" stroke="url(#purpleAccent)" stroke-width="2"/>
+    <rect x="950" y="450" width="70" height="70" rx="8"
+          fill="none" stroke="url(#pinkAccent)" stroke-width="2"/>
+    <circle cx="1050" cy="150" r="25"
+            fill="none" stroke="url(#blueAccent)" stroke-width="2"/>
+    <circle cx="200" cy="500" r="30"
+            fill="none" stroke="url(#purpleAccent)" stroke-width="2"/>
   </g>
 
-  <!-- Arrow showing transformation -->
-  <g>
-    <path d="M 550 314 L 650 314" stroke="#495057" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
-    <defs>
-      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-        <polygon points="0 0, 10 3, 0 6" fill="#495057"/>
-      </marker>
-    </defs>
-    <text x="600" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#495057">The Journey</text>
+  <!-- Animated particles (representing progress/movement) -->
+  <g opacity="0.5">
+    <circle cx="300" cy="180" r="3" fill="#f472b6">
+      <animate attributeName="cy" values="180;150;180" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="850" cy="450" r="3" fill="#a855f7">
+      <animate attributeName="cy" values="450;420;450" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="500" r="3" fill="#60a5fa">
+      <animate attributeName="cy" values="500;470;500" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1000" cy="300" r="3" fill="#ec4899">
+      <animate attributeName="cy" values="300;270;300" dur="5.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="5.5s" repeatCount="indefinite"/>
+    </circle>
   </g>
+
+  <!-- Document/contract representation (bottom right) -->
+  <g transform="translate(900, 480)" opacity="0.5">
+    <rect x="0" y="0" width="80" height="100" rx="4"
+          fill="none" stroke="url(#purpleAccent)" stroke-width="2"/>
+    <line x1="10" y1="15" x2="70" y2="15" stroke="url(#purpleAccent)" stroke-width="2"/>
+    <line x1="10" y1="30" x2="70" y2="30" stroke="url(#purpleAccent)" stroke-width="1.5"/>
+    <line x1="10" y1="40" x2="60" y2="40" stroke="url(#purpleAccent)" stroke-width="1.5"/>
+    <line x1="10" y1="55" x2="70" y2="55" stroke="url(#pinkAccent)" stroke-width="2"/>
+    <line x1="10" y1="70" x2="50" y2="70" stroke="url(#pinkAccent)" stroke-width="1.5"/>
+  </g>
+
+  <!-- Subtle border frame -->
+  <rect x="15" y="15" width="1170" height="600"
+        fill="none" stroke="url(#purpleAccent)" stroke-width="1" rx="8" opacity="0.3"/>
+
+  <!-- Inner accent border -->
+  <rect x="30" y="30" width="1140" height="570"
+        fill="none" stroke="url(#pinkAccent)" stroke-width="0.5" rx="6" opacity="0.2"/>
+
+  <!-- Text content -->
+  <defs>
+    <filter id="textGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <text x="600" y="450" font-family="Arial, Helvetica, sans-serif" font-size="60" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#textGlow)">
+    Complete Implementation Guide
+  </text>
+  <text x="600" y="500" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="300" fill="#f472b6" text-anchor="middle" opacity="0.9">
+    OpenAPI, Avro &amp; Flyway with Spring Boot
+  </text>
 </svg>

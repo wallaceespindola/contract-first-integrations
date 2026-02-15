@@ -1,29 +1,27 @@
-<svg width="1200" height="628" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background Gradient -->
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1f35;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2d3561;stop-opacity:1" />
+    <!-- Deep gradient background -->
+    <linearGradient id="dzoneBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c1222;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a2138;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0c1222;stop-opacity:1" />
     </linearGradient>
 
-    <linearGradient id="nodeBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4c6ef5;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#364fc7;stop-opacity:1" />
+    <!-- Teal accent gradient -->
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2dd4bf;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:1" />
     </linearGradient>
 
-    <linearGradient id="nodeGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#37b24d;stop-opacity:1" />
+    <!-- Purple accent gradient -->
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c084fc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
     </linearGradient>
 
-    <linearGradient id="nodeRed" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ff8787;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f03e3e;stop-opacity:1" />
-    </linearGradient>
-
-    <!-- Glow effect -->
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+    <!-- Glow filter -->
+    <filter id="dzoneGlow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -32,82 +30,188 @@
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="628" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#dzoneBg)"/>
 
-  <!-- Grid pattern -->
+  <!-- Grid pattern background (structured architecture) -->
   <g opacity="0.1">
-    <line x1="0" y1="157" x2="1200" y2="157" stroke="#ffffff" stroke-width="1"/>
-    <line x1="0" y1="314" x2="1200" y2="314" stroke="#ffffff" stroke-width="1"/>
-    <line x1="0" y1="471" x2="1200" y2="471" stroke="#ffffff" stroke-width="1"/>
-    <line x1="300" y1="0" x2="300" y2="628" stroke="#ffffff" stroke-width="1"/>
-    <line x1="600" y1="0" x2="600" y2="628" stroke="#ffffff" stroke-width="1"/>
-    <line x1="900" y1="0" x2="900" y2="628" stroke="#ffffff" stroke-width="1"/>
+    <line x1="0" y1="150" x2="1200" y2="150" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="0" y1="315" x2="1200" y2="315" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="0" y1="480" x2="1200" y2="480" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="630" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="630" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="630" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="800" y1="0" x2="800" y2="630" stroke="#14b8a6" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="630" stroke="#14b8a6" stroke-width="1"/>
   </g>
 
-  <!-- Contract node (center) -->
-  <g filter="url(#glow)">
-    <circle cx="600" cy="314" r="60" fill="url(#nodeBlue)" opacity="0.9"/>
-    <text x="600" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff">CONTRACT</text>
-    <text x="600" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#ffffff">OpenAPI</text>
+  <!-- Repeating pattern elements (left side) -->
+  <g transform="translate(100, 150)" opacity="0.5">
+    <!-- Pattern tile 1 -->
+    <rect x="0" y="0" width="80" height="80" rx="4" fill="none" stroke="url(#tealGrad)" stroke-width="2"/>
+    <circle cx="40" cy="40" r="15" fill="url(#purpleGrad)" opacity="0.6"/>
+
+    <!-- Pattern tile 2 -->
+    <rect x="0" y="100" width="80" height="80" rx="4" fill="none" stroke="url(#purpleGrad)" stroke-width="2"/>
+    <circle cx="40" cy="140" r="15" fill="url(#tealGrad)" opacity="0.6"/>
+
+    <!-- Pattern tile 3 -->
+    <rect x="0" y="200" width="80" height="80" rx="4" fill="none" stroke="url(#tealGrad)" stroke-width="2"/>
+    <circle cx="40" cy="240" r="15" fill="url(#purpleGrad)" opacity="0.6"/>
   </g>
 
-  <!-- Service nodes -->
-  <!-- Top left service -->
-  <circle cx="250" cy="150" r="45" fill="url(#nodeGreen)" opacity="0.85"/>
-  <text x="250" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" dy=".3em">Service A</text>
+  <!-- Repeating pattern elements (right side) -->
+  <g transform="translate(1020, 150)" opacity="0.5">
+    <!-- Pattern tile 1 -->
+    <rect x="0" y="0" width="80" height="80" rx="4" fill="none" stroke="url(#purpleGrad)" stroke-width="2"/>
+    <circle cx="40" cy="40" r="15" fill="url(#tealGrad)" opacity="0.6"/>
 
-  <!-- Top right service -->
-  <circle cx="950" cy="150" r="45" fill="url(#nodeGreen)" opacity="0.85"/>
-  <text x="950" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff" dy=".3em">Service B</text>
+    <!-- Pattern tile 2 -->
+    <rect x="0" y="100" width="80" height="80" rx="4" fill="none" stroke="url(#tealGrad)" stroke-width="2"/>
+    <circle cx="40" cy="140" r="15" fill="url(#purpleGrad)" opacity="0.6"/>
 
-  <!-- Bottom left Kafka -->
-  <rect x="205" y="455" width="90" height="60" rx="8" fill="url(#nodeRed)" opacity="0.85"/>
-  <text x="250" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Kafka</text>
-  <text x="250" y="498" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#ffffff">Events</text>
-
-  <!-- Bottom right Database -->
-  <rect x="905" y="455" width="90" height="60" rx="8" fill="url(#nodeRed)" opacity="0.85"/>
-  <text x="950" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">Database</text>
-  <text x="950" y="498" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#ffffff">Schema</text>
-
-  <!-- Connection lines -->
-  <line x1="250" y1="195" x2="550" y2="284" stroke="#4c6ef5" stroke-width="3" opacity="0.6" stroke-dasharray="5,5">
-    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-  </line>
-  <line x1="950" y1="195" x2="650" y2="284" stroke="#4c6ef5" stroke-width="3" opacity="0.6" stroke-dasharray="5,5">
-    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-  </line>
-  <line x1="250" y1="455" x2="565" y2="350" stroke="#ff8787" stroke-width="3" opacity="0.6" stroke-dasharray="5,5">
-    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1.2s" repeatCount="indefinite"/>
-  </line>
-  <line x1="950" y1="455" x2="635" y2="350" stroke="#ff8787" stroke-width="3" opacity="0.6" stroke-dasharray="5,5">
-    <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1.2s" repeatCount="indefinite"/>
-  </line>
-
-  <!-- Validation gates -->
-  <g opacity="0.8">
-    <rect x="370" y="225" width="80" height="30" rx="4" fill="#51cf66"/>
-    <text x="410" y="243" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1a1f35">VALIDATE</text>
+    <!-- Pattern tile 3 -->
+    <rect x="0" y="200" width="80" height="80" rx="4" fill="none" stroke="url(#purpleGrad)" stroke-width="2"/>
+    <circle cx="40" cy="240" r="15" fill="url(#tealGrad)" opacity="0.6"/>
   </g>
 
-  <g opacity="0.8">
-    <rect x="750" y="225" width="80" height="30" rx="4" fill="#51cf66"/>
-    <text x="790" y="243" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1a1f35">VALIDATE</text>
+  <!-- Central pattern structure -->
+  <g transform="translate(600, 315)">
+    <!-- Outer layer: Large hexagon -->
+    <polygon points="0,-120 104,-60 104,60 0,120 -104,60 -104,-60"
+             fill="none"
+             stroke="url(#tealGrad)"
+             stroke-width="3"
+             opacity="0.4"
+             filter="url(#dzoneGlow)"/>
+
+    <!-- Middle layer: Medium hexagon with rotation -->
+    <polygon points="0,-80 69,-40 69,40 0,80 -69,40 -69,-40"
+             fill="none"
+             stroke="url(#purpleGrad)"
+             stroke-width="3"
+             opacity="0.6"
+             filter="url(#dzoneGlow)">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0 0 0"
+        to="360 0 0"
+        dur="30s"
+        repeatCount="indefinite"/>
+    </polygon>
+
+    <!-- Inner core: Solid shape -->
+    <polygon points="0,-45 39,-22.5 39,22.5 0,45 -39,22.5 -39,-22.5"
+             fill="url(#tealGrad)"
+             stroke="#14b8a6"
+             stroke-width="2"
+             filter="url(#dzoneGlow)"
+             opacity="0.9"/>
+
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="15" fill="#ffffff" opacity="0.4"/>
+    <circle cx="0" cy="0" r="8" fill="#ffffff" opacity="0.6"/>
+
+    <!-- Connecting nodes (6 corners of outer hexagon) -->
+    <circle cx="0" cy="-120" r="10" fill="url(#purpleGrad)" filter="url(#dzoneGlow)" opacity="0.8"/>
+    <circle cx="104" cy="-60" r="10" fill="url(#tealGrad)" filter="url(#dzoneGlow)" opacity="0.8"/>
+    <circle cx="104" cy="60" r="10" fill="url(#purpleGrad)" filter="url(#dzoneGlow)" opacity="0.8"/>
+    <circle cx="0" cy="120" r="10" fill="url(#tealGrad)" filter="url(#dzoneGlow)" opacity="0.8"/>
+    <circle cx="-104" cy="60" r="10" fill="url(#purpleGrad)" filter="url(#dzoneGlow)" opacity="0.8"/>
+    <circle cx="-104" cy="-60" r="10" fill="url(#tealGrad)" filter="url(#dzoneGlow)" opacity="0.8"/>
+
+    <!-- Pulse effect -->
+    <polygon points="0,-45 39,-22.5 39,22.5 0,45 -39,22.5 -39,-22.5"
+             fill="none"
+             stroke="#14b8a6"
+             stroke-width="2"
+             opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+      <animateTransform
+        attributeName="transform"
+        type="scale"
+        from="1"
+        to="1.4"
+        dur="3s"
+        repeatCount="indefinite"/>
+    </polygon>
   </g>
 
-  <!-- Title -->
-  <text x="600" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff">Contract-First Integration</text>
-  <text x="600" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#c9d1e0">Building Scalable Systems with OpenAPI &amp; Kafka</text>
-
-  <!-- Legend -->
-  <g transform="translate(50, 560)">
-    <circle cx="10" cy="0" r="8" fill="#4c6ef5"/>
-    <text x="25" y="5" font-family="Arial, sans-serif" font-size="12" fill="#c9d1e0">Contract</text>
-
-    <circle cx="120" cy="0" r="8" fill="#51cf66"/>
-    <text x="135" y="5" font-family="Arial, sans-serif" font-size="12" fill="#c9d1e0">Service</text>
-
-    <circle cx="220" cy="0" r="8" fill="#ff8787"/>
-    <text x="235" y="5" font-family="Arial, sans-serif" font-size="12" fill="#c9d1e0">Data Store</text>
+  <!-- Bottom repeating elements -->
+  <g transform="translate(300, 520)" opacity="0.35">
+    <rect x="0" y="0" width="60" height="60" rx="6" fill="none" stroke="url(#tealGrad)" stroke-width="2"/>
+    <rect x="80" y="0" width="60" height="60" rx="6" fill="none" stroke="url(#purpleGrad)" stroke-width="2"/>
+    <rect x="160" y="0" width="60" height="60" rx="6" fill="none" stroke="url(#tealGrad)" stroke-width="2"/>
   </g>
+
+  <g transform="translate(780, 520)" opacity="0.35">
+    <rect x="0" y="0" width="60" height="60" rx="6" fill="none" stroke="url(#purpleGrad)" stroke-width="2"/>
+    <rect x="80" y="0" width="60" height="60" rx="6" fill="none" stroke="url(#tealGrad)" stroke-width="2"/>
+  </g>
+
+  <!-- Floating geometric elements -->
+  <g opacity="0.25">
+    <circle cx="250" cy="100" r="30"
+            fill="none" stroke="url(#tealGrad)" stroke-width="2">
+      <animate attributeName="opacity" values="0.25;0.5;0.25" dur="5s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="950" cy="100" r="30"
+            fill="none" stroke="url(#purpleGrad)" stroke-width="2">
+      <animate attributeName="opacity" values="0.25;0.5;0.25" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <rect x="200" y="50" width="40" height="40" rx="4"
+          fill="none" stroke="url(#purpleGrad)" stroke-width="2">
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0 220 70"
+        to="360 220 70"
+        dur="20s"
+        repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Animated particles -->
+  <g opacity="0.4">
+    <circle cx="350" cy="250" r="3" fill="#14b8a6" filter="url(#dzoneGlow)">
+      <animate attributeName="cy" values="250;220;250" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="850" cy="400" r="3" fill="#a855f7" filter="url(#dzoneGlow)">
+      <animate attributeName="cy" values="400;370;400" dur="5.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="5.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="450" cy="150" r="3" fill="#14b8a6" filter="url(#dzoneGlow)">
+      <animate attributeName="cx" values="450;480;450" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="750" cy="480" r="3" fill="#a855f7" filter="url(#dzoneGlow)">
+      <animate attributeName="cx" values="750;720;750" dur="5.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="5.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Subtle border -->
+  <rect x="15" y="15" width="1170" height="600"
+        fill="none" stroke="url(#tealGrad)" stroke-width="1" rx="8" opacity="0.2"/>
+
+  <!-- Text content -->
+  <defs>
+    <filter id="textGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <text x="600" y="100" font-family="Arial, Helvetica, sans-serif" font-size="62" font-weight="bold" fill="#ffffff" text-anchor="middle" filter="url(#textGlow)">
+    Integration Patterns
+  </text>
+  <text x="600" y="155" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="300" fill="#2dd4bf" text-anchor="middle" opacity="0.9">
+    Contract-First Approach
+  </text>
 </svg>

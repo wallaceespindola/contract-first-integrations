@@ -58,20 +58,6 @@ generated-test-sources/
 *.exec
 .jacoco
 
-# AI related files
-agent-logs/
-conversation-history/
-agent-cache/
-.claude/
-.ai/
-CLAUDE.md
-.copilot/
-.copilot-chat/
-.copilot-instructions/
-AGENTS.md
-.cursorignore
-.cursorindexingignore
-
 # Temporary files
 *.tmp
 *.bak
@@ -81,3 +67,102 @@ AGENTS.md
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# =====================================================
+# AI ASSISTANTS / LLM TOOLS
+# =====================================================
+
+# -------------------------
+# Claude (Anthropic)
+# -------------------------
+.claude/
+.claude-cache/
+.claude.json
+.claude-config.json
+.claude-settings.json
+.anthropic/
+.anthropic.json
+
+# Claude project instruction files
+CLAUDE.md
+claude.md
+
+# -------------------------
+# GitHub Copilot
+# -------------------------
+.copilot/
+.copilot-cache/
+.github/copilot/
+.vscode/copilot.json
+
+# Copilot instruction files
+COPILOT.md
+copilot.md
+copilot-instructions.md
+.copilot-instructions.md
+
+# -------------------------
+# Cursor (cursor.sh)
+# -------------------------
+.cursor/
+.cursor-cache/
+.cursor.json
+.cursor-config.json
+.cursor-settings.json
+*.cursor-workspace
+
+# -------------------------
+# Windsurf / Codeium
+# -------------------------
+.windsurf/
+.windsurf-cache/
+.windssurf/
+.codeium/
+.codeium-cache/
+.codeium.json
+
+# -------------------------
+# Agent instruction files
+# -------------------------
+AGENTS.md
+agents.md
+
+# =====================================================
+# MCP (Model Context Protocol)
+# =====================================================
+
+# MCP config directories
+.mcp/
+.mcp-cache/
+.mcp-logs/
+.mcp-state/
+
+# MCP config files
+mcp.json
+mcp.config.json
+mcp-settings.json
+mcp.local.json
+
+# MCP server definitions
+mcp-servers.json
+mcp-tools.json
+mcp-registry.json
+
+# MCP secrets / tokens
+mcp.secrets.json
+.mcp.secrets
+*.mcp.env
+
+# =====================================================
+# Generic AI / LLM
+# =====================================================
+.ai/
+.llm/
+.llm-cache/
+*.ai-config.json
+*.llm-config.json
+*.promptlog
+*.prompt-history
+
+# Keep example MCP files
+!.mcp.json.example

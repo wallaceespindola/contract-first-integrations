@@ -55,7 +55,7 @@
 
 **Medium**
 - [ ] Create/verify Medium account
-- [ ] Upload article: `articles/medium-how-i-learned-contract-first-integration.md`
+- [ ] Upload article: `articles/medium-contract-first-integration-complete-guide.md`
 - [ ] Add featured image (1200x627px)
 - [ ] Add subtitle
 - [ ] Add 5 tags: java, microservices, api, kafka, architecture
@@ -66,7 +66,7 @@
 
 **LinkedIn Pulse**
 - [ ] Create LinkedIn article (not post)
-- [ ] Upload article: `articles/linkedin-why-senior-engineers-choose-contract-first.md`
+- [ ] Upload article: `articles/linkedin-contract-first-parallel-development.md`
 - [ ] Add featured image
 - [ ] Add hashtags: #softwaredevelopment #microservices #api #engineering #careeradvice #java #springboot #kafka
 - [ ] Optimize posting time: Tuesday-Thursday, 7:30-9:00 AM or 12:00-1:00 PM
@@ -87,7 +87,7 @@
 
 **JavaPro Magazine** (if accepting submissions)
 - [ ] Check JavaPro submission guidelines
-- [ ] Upload article: `articles/javapro-enterprise-contract-first-architecture.md`
+- [ ] Upload article: `articles/javapro-contract-first-integration-advanced-patterns.md`
 - [ ] Add featured image
 - [ ] Submit author bio and credentials
 - [ ] Submit for editorial review
@@ -97,7 +97,7 @@
 
 **Substack**
 - [ ] Create/verify Substack newsletter account
-- [ ] Upload article: `articles/substack-contract-first-integration.md`
+- [ ] Upload article: `articles/substack-contract-first-error-handling.md`
 - [ ] Add featured image (1200x675px)
 - [ ] Add subtitle
 - [ ] Preview email rendering
