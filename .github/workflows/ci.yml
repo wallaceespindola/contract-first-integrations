@@ -41,7 +41,7 @@ jobs:
       run: docker build -t contract-first-integrations:${{ github.sha }} .
 
     - name: Archive JAR
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: contract-first-integrations-jar
         path: target/*.jar
