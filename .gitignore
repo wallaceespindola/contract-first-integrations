@@ -38,6 +38,21 @@ pom.xml.versionsBackup
 .classpath
 .factorypath
 
+# JetBrains Fleet
+.fleet/
+
+# NetBeans
+nbproject/
+nbbuild/
+nbdist/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse launch configs
+*.launch
+
 # OS
 .DS_Store
 Thumbs.db
@@ -120,6 +135,15 @@ copilot-instructions.md
 .codeium/
 .codeium-cache/
 .codeium.json
+
+# -------------------------
+# Google Gemini
+# -------------------------
+.gemini/
+.gemini-cache/
+.gemini.json
+GEMINI.md
+gemini.md
 
 # -------------------------
 # Agent instruction files
