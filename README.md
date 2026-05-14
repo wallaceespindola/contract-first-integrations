@@ -306,12 +306,12 @@ SELECT * FROM processed_events;
 - **Spring Boot 3.5.10** (Web, Data JPA, Actuator, Kafka)
 - **PostgreSQL 17** (Database)
 - **Apache Kafka 7.8.1** (Event streaming)
-- **Apache Avro 1.12.0** (Event serialization)
+- **Apache Avro 1.12.1** (Event serialization)
 - **Confluent Schema Registry 7.8.1** (Schema governance)
 - **Flyway** (Database migrations)
-- **Lombok** (Boilerplate reduction)
-- **springdoc-openapi** (Swagger UI)
-- **TestContainers** (Integration testing)
+- **Lombok 1.18.46** (Boilerplate reduction)
+- **springdoc-openapi 2.8.1** (Swagger UI)
+- **TestContainers 1.21.4** (Integration testing)
 
 ## 📖 Further Reading
 
