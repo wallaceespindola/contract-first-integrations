@@ -31,6 +31,46 @@ Contract-first is an approach where you **define the integration boundary first*
 
 **Key Principle:** The contract is the single source of truth. Code, documentation, SDKs, mocks, and tests are all derived from contracts.
 
+```mermaid
+graph LR
+    subgraph Contracts["📄 Contracts — Source of Truth"]
+        OpenAPI["OpenAPI 3.0 YAML\norders-api.v1.yaml"]
+        Avro["Avro Schema\nOrderCreated.v1.avsc"]
+        SQL["Flyway SQL\nV1__create_orders.sql"]
+    end
+
+    subgraph Generated["⚡ Generated Artifacts"]
+        Controller["Java Interface\n(Server Stub)"]
+        DTO["Java Records\n(Request / Response DTOs)"]
+        AvroClass["Java Classes\n(Avro POJOs)"]
+        DBSchema["DB Schema\n(Tables & Indexes)"]
+    end
+
+    subgraph Teams["👥 Parallel Development"]
+        Provider["🏭 Provider Team\nImplements stub"]
+        Consumer["🛒 Consumer Team\nUses client SDK"]
+    end
+
+    OpenAPI -->|"openapi-generator"| Controller
+    OpenAPI -->|"openapi-generator"| DTO
+    Avro -->|"avro-maven-plugin"| AvroClass
+    SQL -->|"Flyway migrate"| DBSchema
+
+    Controller --> Provider
+    DTO --> Provider
+    DTO --> Consumer
+    AvroClass --> Provider
+    AvroClass --> Consumer
+
+    classDef contractNode fill:#f3d9fa,stroke:#9c36b5,color:#000,stroke-width:2px
+    classDef genNode fill:#d3f9d8,stroke:#2f9e44,color:#000,stroke-width:2px
+    classDef teamNode fill:#dbe4ff,stroke:#3b5bdb,color:#000,stroke-width:2px
+
+    class OpenAPI,Avro,SQL contractNode
+    class Controller,DTO,AvroClass,DBSchema genNode
+    class Provider,Consumer teamNode
+```
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -97,32 +137,41 @@ curl -X POST http://localhost:8080/v1/orders \
 
 ## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                     Client/Consumer                     │
-└────────────┬────────────────────────────┬───────────────┘
-             │                            │
-   ┌─────────▼──────────┐       ┌─────────▼─────────────┐
-   │ REST API (OpenAPI) │       │    Kafka Consumer     │
-   │  POST /v1/orders   │       │  OrderCreatedListener │
-   └─────────┬──────────┘       └─────────▲─────────────┘
-             │                            │
-   ┌─────────▼────────────────────────────┴─────────┐
-   │         Spring Boot Application                │
-   │  ┌──────────────────────────────────────────┐  │
-   │  │ OrderService (Business Logic)            │  │
-   │  │  - Idempotency checking                  │  │
-   │  │  - Order creation                        │  │
-   │  │  - Event publishing                      │  │
-   │  └──────────┬─────────────────┬─────────────┘  │
-   │             │                 │                │
-   │   ┌─────────▼──────┐    ┌─────▼──────────┐     │
-   │   │ PostgreSQL     │    │  Kafka Broker  │     │
-   │   │  - orders      │    │  + Schema      │     │
-   │   │  - order_items │    │    Registry    │     │
-   │   │  - idempotency │    │                │     │
-   │   └────────────────┘    └────────────────┘     │
-   └────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    Client["🖥️ Client / Consumer"]
+
+    subgraph AppLayer["⚙️ Spring Boot Application"]
+        REST["📋 REST Controller<br/>POST /v1/orders · GET /v1/orders/{id}"]
+        OrderService["🔧 OrderService<br/>Idempotency · Order Creation · Events"]
+        KafkaConsumer["📨 Kafka Consumer<br/>OrderCreatedListener"]
+    end
+
+    subgraph DataLayer["💾 Infrastructure"]
+        PostgreSQL[("🗄️ PostgreSQL 17<br/>orders · order_items<br/>idempotency_keys · processed_events")]
+        KafkaBroker[("📡 Kafka Broker<br/>+ Confluent Schema Registry")]
+    end
+
+    Client -->|"HTTP POST / GET"| REST
+    REST --> OrderService
+    OrderService -->|"persist"| PostgreSQL
+    OrderService -->|"publish OrderCreated"| KafkaBroker
+    KafkaBroker -.->|"consume"| KafkaConsumer
+    KafkaConsumer --> OrderService
+
+    classDef clientNode fill:#dbe4ff,stroke:#3b5bdb,color:#1a1a2e,stroke-width:2px
+    classDef apiNode fill:#d3f9d8,stroke:#2f9e44,color:#1a1a2e,stroke-width:2px
+    classDef serviceNode fill:#c3fae8,stroke:#0ca678,color:#1a1a2e,stroke-width:2px
+    classDef consumerNode fill:#fff3bf,stroke:#f59f00,color:#1a1a2e,stroke-width:2px
+    classDef dbNode fill:#e8eaf6,stroke:#3949ab,color:#1a1a2e,stroke-width:2px
+    classDef brokerNode fill:#fff3e0,stroke:#e67700,color:#1a1a2e,stroke-width:2px
+
+    class Client clientNode
+    class REST apiNode
+    class OrderService serviceNode
+    class KafkaConsumer consumerNode
+    class PostgreSQL dbNode
+    class KafkaBroker brokerNode
 ```
 
 ## 📁 Project Structure
@@ -272,6 +321,40 @@ SELECT * FROM processed_events;
 - Service hashes request body and stores with key
 - Duplicate key + same hash → return cached response (safe retry)
 - Duplicate key + different hash → return 409 Conflict
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant A as REST API
+    participant S as OrderService
+    participant D as PostgreSQL
+
+    C->>A: POST /v1/orders (idempotencyKey: "key-001")
+    activate A
+    A->>S: createOrder(request)
+    activate S
+    S->>D: SELECT WHERE idempotency_key = 'key-001'
+    D-->>S: ∅ Not found
+    S->>D: INSERT order + idempotency record
+    D-->>S: ✓ Saved
+    S-->>A: OrderResponse
+    deactivate S
+    A-->>C: 201 Created
+    deactivate A
+
+    Note over C,D: Safe retry — same key replayed
+
+    C->>A: POST /v1/orders (idempotencyKey: "key-001")
+    activate A
+    A->>S: createOrder(request)
+    activate S
+    S->>D: SELECT WHERE idempotency_key = 'key-001'
+    D-->>S: ✓ Cached response found
+    S-->>A: Cached OrderResponse
+    deactivate S
+    A-->>C: 200 OK (cached)
+    deactivate A
+```
 
 ### 2. Kafka Consumer Idempotency
 
