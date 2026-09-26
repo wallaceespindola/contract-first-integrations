@@ -15,6 +15,25 @@
 [![CodeQL](https://github.com/wallaceespindola/contract-first-integrations/actions/workflows/codeql.yml/badge.svg)](https://github.com/wallaceespindola/contract-first-integrations/actions/workflows/codeql.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](https://opensource.org/licenses/Apache-2.0)
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [🎯 What is Contract-First?](#-what-is-contract-first)
+- [🚀 Quick Start](#-quick-start)
+- [📋 Features](#-features)
+- [🏗️ Architecture](#️-architecture)
+- [📁 Project Structure](#-project-structure)
+- [🛠️ Makefile Commands](#️-makefile-commands)
+- [🧪 Testing](#-testing)
+- [🔑 Key Patterns Demonstrated](#-key-patterns-demonstrated)
+- [📚 API Documentation](#-api-documentation)
+- [🔧 Technology Stack](#-technology-stack)
+- [📖 Further Reading](#-further-reading)
+- [📄 License](#-license)
+- [👤 Author](#-author)
+- [🤝 Contributing](#-contributing)
+- [⭐ Show your support](#-show-your-support)
+
 ## Introduction
 
 Reference implementation demonstrating **contract-first** (API-first / schema-first) development patterns for systems integration. 
