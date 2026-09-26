@@ -1,3 +1,5 @@
+![Contract-First Integrations](docs/images/devto-featured-contract-first.png)
+
 # Contract-First Integrations
 
 
