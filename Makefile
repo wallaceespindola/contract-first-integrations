@@ -51,6 +51,7 @@ docker:
 	docker build -t $(APP_NAME):latest .
 
 compose:
+	@test -f .env || cp .env.example .env
 	docker-compose up --build
 
 test-docker:
