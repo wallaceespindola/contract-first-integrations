@@ -308,5 +308,5 @@ git commit -m "Regenerate PNG images from updated SVGs"
 For issues with:
 - **Script execution**: Check file permissions (`chmod +x convert-svg-to-png.sh`)
 - **rsvg-convert**: Install librsvg for your OS
-- **SVG content**: Validate SVG with [W3C Validator](https://www.w3.org/svg/validator/)
+- **SVG content**: Validate SVG with [W3C Validator](https://validator.w3.org/)
 - **Image quality**: Ensure SVG displays correctly in browser first

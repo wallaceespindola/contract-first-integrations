@@ -365,7 +365,7 @@ Several emerging patterns extend contract-first principles:
 ## References
 
 1. OpenAPI Specification 3.0+. OpenAPI Initiative, 2024. https://spec.openapis.org/oas/latest.html
-2. Apache Avro 1.11 Specification. Apache Software Foundation, 2023. https://avro.apache.org/docs/current/spec.html
+2. Apache Avro 1.11 Specification. Apache Software Foundation, 2023. https://avro.apache.org/docs/1.12.0/specification/
 3. Confluent Schema Registry Documentation. Confluent Inc., 2024. https://docs.confluent.io/platform/current/schema-registry/
 4. Richardson, C. "Microservices Patterns." Manning Publications, 2018. https://www.manning.com/books/microservices-patterns
 5. Newman, S. "Building Microservices: Designing Fine-Grained Systems, 2nd Edition." O'Reilly Media, 2021. https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/
